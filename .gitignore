@@ -1,0 +1,9 @@
+# Environments
+
+/env/
+/ENV/
+
+# Ignorer le répertoire "data"
+/data/
+
+
