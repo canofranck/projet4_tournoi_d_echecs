@@ -1,0 +1,8 @@
+from views.menu import Menu
+# Programme principal
+if __name__ == '__main__':
+    
+    try:
+        Menu()
+    except KeyboardInterrupt:
+        print("Arret du programme")
