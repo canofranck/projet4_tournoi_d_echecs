@@ -1,0 +1,5 @@
+Liste de tous les joueurs par ordre alphabétique :
+Nom : cano, Prénom : emma, Date de naissance : 26/06/2001, ID : 987456321, Classement : 2, Score du tournoi : 5
+Nom : cano, Prénom : franck, Date de naissance : 23/05/1971, ID : 123456789, Classement : 1, Score du tournoi : 10
+Nom : magalie, Prénom : magalie, Date de naissance : 12/01/1990, ID : 9999999, Classement : 3, Score du tournoi : 3
+Nom : mamadou, Prénom : mamadou, Date de naissance : 12/05/1980, ID : 456312314, Classement : 0, Score du tournoi : 0
