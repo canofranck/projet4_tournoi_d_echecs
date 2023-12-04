@@ -1,3 +1,6 @@
+import constantes
+
+
 class MainView:
     @staticmethod
     def display_main_menu():
@@ -7,10 +10,10 @@ class MainView:
             str: Le choix de l'utilisateur.
         """
         print("\nMenu :")
-        print("1. Gestion des joueurs")
-        print("2. Gestion des tournois")
-        print("3. Rapports")
-        print("4. Quitter")
+        print(constantes.MAIN_MENU_JOUEUR, "Gestion des joueurs")
+        print(constantes.MAIN_MENU_TOUNOI, "Gestion des tournois")
+        print(constantes.MAIN_MENU_REPORTS, "Rapports")
+        print(constantes.MAIN_MENU_QUIT, "Quitter")
         return input("Choisissez une option : ")
 
     @staticmethod

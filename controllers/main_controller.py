@@ -1,7 +1,8 @@
 from views.main_view import MainView
 from controllers.player_controller import PlayerController
 from controllers.report_controller import ReportController
-from controllers.tournament_controller import TournamentController
+# from controllers.tournament_controller import TournamentController
+import constantes
 
 
 class MainController:
@@ -13,7 +14,6 @@ class MainController:
         self.player_controller = PlayerController()
         # self.tournament_controller = TournamentController()
         self.report_controller = ReportController(self.player_controller)
-                                                #self.tournament_controller)
 
     def run(self):
         """Lance l'application principale.
@@ -31,13 +31,13 @@ class MainController:
         while True:
             choice = self.main_view.display_main_menu()
 
-            if choice == "1":
+            if choice == constantes.MAIN_MENU_JOUEUR:
                 self.player_controller.run_player_menu(self.main_view)
-            elif choice == "2":
+            elif choice == constantes.MAIN_MENU_TOUNOI:
                 pass
-            elif choice == "3":
+            elif choice == constantes.MAIN_MENU_REPORTS:
                 self.report_controller.run_report_menu()
-            elif choice == "4":
+            elif choice == constantes.MAIN_MENU_QUIT:
                 print("Au revoir !")
                 break
             else:
