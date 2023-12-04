@@ -95,9 +95,16 @@ class PlayerController:
             # Triez les joueurs par nom de famille, puis par prénom
             sorted_players = sorted(self.players,
                                     key=lambda x: (x.last_name, x.first_name)) 
-            output_string = "Liste de tous les joueurs par ordre alphabétique :\n"
+            output_string = (
+                "Liste de tous les joueurs par ordre alphabétique :\n")
             for player in sorted_players:
-                output_string +=f"Nom : {player.last_name}, Prénom : {player.first_name}, Date de naissance : {player.birth_date}, ID : {player.player_id}, Classement : {player.ranking}, Score du tournoi : {player.score_tournament}\n"
+                output_string += (
+                 f"Nom : {player.last_name}, Prénom : {player.first_name}, "
+                 f"Date de naissance : {player.birth_date}, "
+                 f"ID : {player.player_id}, "
+                 f"Classement : {player.ranking}, "
+                 f"Score du tournoi : {player.score_tournament}\n"
+                 )
                 print(output_string)
         return output_string
 

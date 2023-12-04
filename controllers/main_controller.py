@@ -12,8 +12,8 @@ class MainController:
         self.main_view = MainView()
         self.player_controller = PlayerController()
         # self.tournament_controller = TournamentController()
-        self.report_controller = ReportController(self.player_controller )
-                                                #  self.tournament_controller)
+        self.report_controller = ReportController(self.player_controller)
+                                                #self.tournament_controller)
 
     def run(self):
         """Lance l'application principale.

@@ -5,8 +5,6 @@ class Round:
         # initialisation des attributs
         pass
 
-
-
 # Logique de gestion des rounds
 # Créez des instances de tour et de matchs
 # Générez les paires pour chaque round en fonction du score des joueurs

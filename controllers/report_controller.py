@@ -5,7 +5,8 @@ from views.report_view import ReportView
 class ReportController:
     """Contrôleur pour gérer les rapports et leurs opérations associées."""
     def __init__(self, player_controller, tournament_controller=None):
-        """Initialise le contrôleur des rapports avec les contrôleurs de joueurs et de tournois en option."""
+        """Initialise le contrôleur des rapports avec les contrôleurs
+        des joueurs et de tournois en option."""
         self.player_controller = player_controller
         self.tournament_controller = tournament_controller
         self.report_view = ReportView()
@@ -31,7 +32,8 @@ class ReportController:
                 self.report_view.display_invalid_option_message()
 
     def display_players_alphabetically(self):
-        """Affiche les joueurs par ordre alphabétique et permet de sauvegarder le rapport."""
+        """Affiche les joueurs par ordre alphabétique et permet de sauvegarder
+        le rapport."""
         players_report = self.player_controller.display_players()
         user_choice = self.report_view.prompt_save_report()
         if user_choice.lower() == "o":
@@ -54,7 +56,7 @@ class ReportController:
         pass
 
     def display_all_tournament_rounds_and_matches(self):
-        """Affiche tous les tours d'un tournoi et tous les matchs du tournoi."""
+        """Affiche tous les tours d'un tournoi et tous les matchs du tournoi"""
         pass
 
     def save_report_to_file(self, report_text, file_name):
@@ -93,7 +95,7 @@ class ReportController:
         """
         Sauvegarde le rapport avec un modèle HTML spécifique.
         Args:
-        report_text (str): Le texte du rapport à sauvegarder avec le modèle HTML.
+        report_text (str): Le texte du rapport à sauve avec le modèle HTML.
         file_name (str): Le nom du fichier de sauvegarde.
         """  
         template_path = "templates/template.html"

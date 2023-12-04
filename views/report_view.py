@@ -11,16 +11,19 @@ class ReportView:
         print("2. Liste de tous les tournois")
         print("3. Détails d'un tournoi donné")
         print("4. Liste des joueurs d'un tournoi par ordre alphabétique")
-        print("5. Liste de tous les tours d'un tournoi et de tous les matchs du tournoi")
+        print("5. Liste de tous les tours d'un tournoi et de tous les matchs" +
+              "du tournoi")
         print("6. Revenir au menu principal")
         return input("Choisissez une option : ")
 
     @staticmethod
     def display_invalid_option_message():
         """
-        Affiche un message indiquant qu'une option invalide a été sélectionnée pour les rapports.
+        Affiche un message indiquant qu'une option invalide a été sélectionnée
+        pour les rapports.
         """
-        print("Option invalide. Veuillez choisir une option valide pour les rapports.")
+        print("Option invalide. Veuillez choisir une option valide pour" +
+              "les rapports.")
 
     # Ajoutez d'autres fonctions pour l'affichage des différents rapports ici
     @staticmethod
@@ -35,7 +38,8 @@ class ReportView:
     @staticmethod
     def get_file_name_to_save():
         """
-        Demande à l'utilisateur d'entrer le nom du fichier pour sauvegarder le rapport.
+        Demande à l'utilisateur d'entrer le nom du fichier pour sauvegarder
+        le rapport.
         Returns:
             str: Le nom du fichier de rapport.
         """
@@ -44,9 +48,11 @@ class ReportView:
     @staticmethod
     def display_report_saved_message(file_path):
         """
-        Affiche un message indiquant que le rapport a été sauvegardé avec succès.
+        Affiche un message indiquant que le rapport a été sauvegardé 
+        avec succès.
         Args:
-            file_path (str): Le chemin du fichier où le rapport a été sauvegardé.
+            file_path (str): Le chemin du fichier où le rapport a été
+            sauvegardé.
         """
         print(f"Rapport sauvegardé avec succès dans {file_path}")
 
