@@ -66,12 +66,13 @@ class PlayerController:
                         ranking,
                         score_tournament)
         # Vérifiez s'il y a des doublons en fonction de l'identifiant du joueur
-        if not any(p.player_id == player_id for p in self.players):
-            player.save() 
-            print("Joueur ajouté avec succès dans la sauvegarde!")
-        else:
+        players = Player.load_players()
+        if Player.is_player_id_taken(player_id, players):
             print("Le joueur existe déjà dans la base de données.")
-
+        else:
+            player.save()
+            print("Joueur ajouté avec succès dans la sauvegarde!")
+             
     def display_players(self):
         """Affiche la liste des joueurs.
         Cette méthode affiche la liste de tous les joueurs par ordre

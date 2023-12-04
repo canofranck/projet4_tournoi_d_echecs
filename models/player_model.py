@@ -105,3 +105,11 @@ class Player:
         """
         if not os.path.exists(DATA_FOLDER):
             os.makedirs(DATA_FOLDER)
+
+    @classmethod
+    def is_player_id_taken(cls, player_id, players):
+        """Vérifie si l'ID du joueur est déjà pris."""
+        for player in players:
+            if player.player_id == player_id:
+                return True
+        return False
