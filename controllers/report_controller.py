@@ -50,7 +50,6 @@ class ReportController:
                  f"Nom : {player.last_name}, Prénom : {player.first_name}, "
                  f"Date de naissance : {player.birth_date}, "
                  f"ID : {player.player_id}, "
-                 f"Classement : {player.ranking}, "
                  f"Score du tournoi : {player.score_tournament}\n"
                  )
         user_choice = self.report_view.prompt_save_report()

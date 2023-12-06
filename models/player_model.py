@@ -11,7 +11,6 @@ class Player:
                  first_name,
                  birth_date,
                  player_id,
-                 ranking,
                  score_tournament
                  ):
         """
@@ -29,7 +28,6 @@ class Player:
         self.first_name = first_name
         self.birth_date = birth_date
         self.player_id = player_id
-        self.ranking = ranking
         self.score_tournament = score_tournament
 
     @staticmethod
@@ -49,6 +47,9 @@ class Player:
         players = []
         Player.create_data_folder_if_not_exists()
         file_path = os.path.join(DATA_FOLDER, FILE_NAME)
+        if not os.path.exists(file_path) or os.path.getsize(file_path) == 0:
+            return players  # Si le fichier n'existe pas ou est vide, retourne une liste vide
+
         with open(file_path, 'r') as file:
             players_data = json.load(file)
             for data in players_data:
@@ -57,7 +58,6 @@ class Player:
                     data['first_name'],
                     data['birth_date'],
                     data['player_id'],
-                    data['ranking'],
                     data['score_tournament']
                 )
                 players.append(player)
@@ -85,7 +85,6 @@ class Player:
                     "first_name": p.first_name,
                     "birth_date": p.birth_date,
                     "player_id": p.player_id,
-                    "ranking": p.ranking,
                     "score_tournament": p.score_tournament
                 })
         with open(file_path, 'w') as file:  

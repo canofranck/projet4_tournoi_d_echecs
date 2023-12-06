@@ -55,7 +55,6 @@ class PlayerController:
         first_name = player_data['first_name']
         birth_date = player_data['birth_date']
         player_id = player_data['player_id']
-        ranking = player_data['ranking']
         score_tournament = player_data['score_tournament']
         # vérifications supplémentaires ici,valider la date au format requis
 
@@ -63,7 +62,6 @@ class PlayerController:
                         first_name,
                         birth_date,
                         player_id,
-                        ranking,
                         score_tournament)
         # Vérifiez s'il y a des doublons en fonction de l'identifiant du joueur
         players = Player.load_players()

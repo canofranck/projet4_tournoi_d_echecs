@@ -75,9 +75,7 @@ class PlayerView:
             else:
                 print("L'identifiant n'est pas conforme.Assurez-vous d'avoir" +
                       " 2 lettres suivies de 5 chiffres. Réessayez.")
-             
-        # ranking = input("Entrez le classement du joueur : ")
-        ranking = 0
+
         # score_tournament=input("Entrez le score du joueur dans le tournoi: ")
         score_tournament = 0
 
@@ -86,7 +84,6 @@ class PlayerView:
             'first_name': first_name,
             'birth_date': birth_date,
             'player_id': player_id,
-            'ranking': ranking,
             'score_tournament': score_tournament
         }
 
@@ -104,7 +101,6 @@ class PlayerView:
                  f"Nom : {player.last_name}, Prénom : {player.first_name}, "
                  f"Date de naissance : {player.birth_date}, "
                  f"ID : {player.player_id}, "
-                 f"Classement : {player.ranking}, "
                  f"Score du tournoi : {player.score_tournament}\n"
                  )
             print(output_string)
