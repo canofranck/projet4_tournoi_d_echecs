@@ -1,0 +1,4 @@
+Liste de tous les joueurs par ordre alphabétique :
+Nom : cano, Prénom : franck, Date de naissance : 22/05/1971, ID : 87654321, Classement : 0, Score du tournoi : 0
+Nom : cano, Prénom : pascale, Date de naissance : 25/05/1967, ID : 11223344, Classement : 0, Score du tournoi : 0
+Nom : khoussa, Prénom : mamadou , Date de naissance : 25/05/1991, ID : 12345678, Classement : 0, Score du tournoi : 0
