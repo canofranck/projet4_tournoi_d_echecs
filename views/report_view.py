@@ -11,7 +11,7 @@ class ReportView:
         print("2. Liste de tous les tournois")
         print("3. Détails d'un tournoi donné")
         print("4. Liste des joueurs d'un tournoi par ordre alphabétique")
-        print("5. Liste de tous les tours d'un tournoi et de tous les matchs" +
+        print("5. Liste de tous les tours d'un tournoi et de tous les matchs " +
               "du tournoi")
         print("6. Revenir au menu principal")
         return input("Choisissez une option : ")
