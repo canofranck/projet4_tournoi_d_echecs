@@ -64,8 +64,8 @@ class PlayerController:
                         player_id,
                         score_tournament)
         # Vérifiez s'il y a des doublons en fonction de l'identifiant du joueur
-        players = Player.load_players()
-        if Player.is_player_id_taken(player_id, players):
+     
+        if Player.is_player_id_taken(player_id):
             print("Le joueur existe déjà dans la base de données.")
         else:
             player.save()

@@ -124,17 +124,13 @@ class TournamentController:
         if not ongoing_tournaments:
             TournamentView.display_no_available_tournaments()
             return
-        print("Tournois en cours :")
-        for i, tournament in enumerate(ongoing_tournaments, start=1):
-            print(f"{i}. {tournament.tournament_name}")
+
         TournamentView.display_ongoing_tournaments(ongoing_tournaments)
 
         try:
             choice = int(input("Veuillez sélectionner le numéro du tournoi à lancer : "))
             if 1 <= choice <= len(ongoing_tournaments):
-                selected_tournament_index = choice - 1
-                selected_tournament = ongoing_tournaments[selected_tournament_index]
-                print(f"Avant le lancement : {selected_tournament.tournament_name}")
+                selected_tournament = ongoing_tournaments[choice - 1]
                 self.start_selected_tournament(selected_tournament)
             else:
                 TournamentView.display_invalid_choice()
@@ -143,15 +139,12 @@ class TournamentController:
 
     def start_selected_tournament(self, tournament):
         """Démarre le tournoi sélectionné."""
-        print(f"Au début de la méthode start_selected_tournament : {tournament.tournament_name}")
-        
         # Chargez les tournois existants
         tournaments = Tournament.load_tournaments()
 
         # Trouvez l'index du tournoi dans la liste
-        for existing_tournament in tournaments:
+        for index, existing_tournament in enumerate(tournaments):
             if existing_tournament.tournament_id == tournament.tournament_id:
-                print(f"Avant le changement d'état : {existing_tournament.tournament_name}")
                 # Modifiez l'état du tournoi
                 if existing_tournament.etat_tournoi == TO_LAUNCH:
                     existing_tournament.start_tournament(existing_tournament.tournament_id)
@@ -161,8 +154,10 @@ class TournamentController:
                     # Appel au contrôleur de round pour débuter l'entrée des résultats
                     round_controller = roundController()
                     round_controller.start_rounds(existing_tournament, existing_tournament.tournament_id, players_ids)
-                    break  # Sortir de la boucle après avoir trouvé le tournoi
                 elif existing_tournament.etat_tournoi == IN_PROGRESS:
                     TournamentView.display_tournament_in_progress()
                 else:
                     TournamentView.display_tournament_cannot_start()
+                    break
+            else:
+                TournamentView.display_invalid_choice()

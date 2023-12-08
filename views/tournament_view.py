@@ -1,3 +1,6 @@
+from constantes import TO_LAUNCH, IN_PROGRESS
+
+
 class TournamentView:
     """Vue pour la gestion des tournois."""
 
@@ -28,3 +31,52 @@ class TournamentView:
         for tournament in tournaments:
             print(f"- {tournament.tournament_name}")
         print()
+
+    @staticmethod
+    def display_ongoing_tournaments(tournaments):
+        """Affiche les tournois en cours."""
+        print("Tournois en cours :\n")
+        for tournament in tournaments:
+            TournamentView.display_tournament(tournament)
+        print()
+
+    @staticmethod
+    def display_invalid_choice():
+        """Affiche un message en cas de choix invalide."""
+        print("Choix invalide.")
+
+    @staticmethod
+    def display_tournament_launched(tournament_name):
+        """Affiche le message indiquant que le tournoi a été lancé avec succès."""
+        print(f"Le tournoi '{tournament_name}' a été lancé avec succès.\n")
+
+    @staticmethod
+    def display_tournament(tournament):
+        """Affiche les détails du tournoi."""
+        if tournament.etat_tournoi == TO_LAUNCH:
+            etat = "À lancer"
+        elif tournament.etat_tournoi == IN_PROGRESS:
+            etat = "En cours"
+        else:
+            etat = "Terminé"
+
+        details = (
+                    f"{tournament.tournament_id}. {tournament.tournament_name} ({etat})"
+                    f" - {tournament.location} - {tournament.tournament_date}\n"
+                  )
+        print(details)
+
+    @staticmethod
+    def display_tournament_in_progress():
+        """Affiche un message indiquant qu'un tournoi est déjà en cours."""
+        print("Le tournoi est déjà en cours. Vous ne pouvez pas le lancer à nouveau.\n")
+
+    @staticmethod
+    def display_tournament_cannot_start():
+        """Affiche un message indiquant qu'un tournoi ne peut pas être lancé."""
+        print("Le tournoi ne peut pas être lancé. Vérifiez s'il est déjà terminé ou en cours.\n")
+
+    @staticmethod
+    def display_no_available_tournaments():
+        """Affiche un message indiquant qu'aucun tournoi n'est disponible."""
+        print("Aucun tournoi n'est disponible.\n")
