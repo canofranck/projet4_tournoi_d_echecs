@@ -35,9 +35,9 @@ class TournamentView:
     @staticmethod
     def display_ongoing_tournaments(tournaments):
         """Affiche les tournois en cours."""
-        print("Tournois en cours :\n")
-        for tournament in tournaments:
-            TournamentView.display_tournament(tournament)
+        print("Tournois en cours dans display:\n")
+        for i, tournament in enumerate(tournaments):
+            TournamentView.display_tournament(tournament, i)
         print()
 
     @staticmethod
@@ -51,19 +51,25 @@ class TournamentView:
         print(f"Le tournoi '{tournament_name}' a été lancé avec succès.\n")
 
     @staticmethod
-    def display_tournament(tournament):
+    def display_tournament(tournament,  index=None):
         """Affiche les détails du tournoi."""
         if tournament.etat_tournoi == TO_LAUNCH:
-            etat = "À lancer"
+            etat = "TO_LAUNCH"
         elif tournament.etat_tournoi == IN_PROGRESS:
-            etat = "En cours"
+            etat = "IN_PROGRESS"
         else:
-            etat = "Terminé"
+            etat = "FINISH"
 
-        details = (
-                    f"{tournament.tournament_id}. {tournament.tournament_name} ({etat})"
-                    f" - {tournament.location} - {tournament.tournament_date}\n"
-                  )
+        if index is not None:
+            details = (
+                f"{index + 1}. {tournament.tournament_name} ({etat})"
+                f" - {tournament.location} - {tournament.tournament_date}\n"
+             )
+        else:
+            details = (
+                f"{tournament.tournament_id}. {tournament.tournament_name} ({etat})"
+                f" - {tournament.location} - {tournament.tournament_date}\n"
+            )
         print(details)
 
     @staticmethod

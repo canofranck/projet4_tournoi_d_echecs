@@ -129,8 +129,10 @@ class Tournament:
     def start_tournament(self, tournament_id):
         """Démarre le tournoi en mettant à jour l'état."""
         if self.etat_tournoi == TO_LAUNCH:
+            print("Avant la mise à jour de l'état dans start_tournament")
             updated_values = {"etat_tournoi": IN_PROGRESS}
             Tournament.update_tournament(tournament_id, updated_values)
+            print("Après la mise à jour de l'état dans start_tournament")
         else:
             print("Le tournoi ne peut pas être lancé dans son état actuel.")
 
