@@ -129,13 +129,12 @@ class Tournament:
     def start_tournament(self, tournament_id):
         """Démarre le tournoi en mettant à jour l'état."""
         if self.etat_tournoi == TO_LAUNCH:
-            print("Avant la mise à jour de l'état dans start_tournament")
+            print(f"Avant la mise à jour de l'état dans start_tournament : {self.etat_tournoi}")
             updated_values = {"etat_tournoi": IN_PROGRESS}
             Tournament.update_tournament(tournament_id, updated_values)
-            print("Après la mise à jour de l'état dans start_tournament")
-        else:
-            print("Le tournoi ne peut pas être lancé dans son état actuel.")
-
+            self.etat_tournoi = IN_PROGRESS
+            print(f"Après la mise à jour de l'état dans start_tournament : {self.etat_tournoi}")
+        
     def end_tournament(self):
         """Termine le tournoi en mettant à jour l'état."""
         self.etat_tournoi = FINISH
@@ -184,5 +183,6 @@ class Tournament:
 
         # Sauvegardez la liste mise à jour dans le fichier JSON
         Tournament.save_tournaments(tournaments)
-
+        
+        
 

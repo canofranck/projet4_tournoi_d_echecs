@@ -146,37 +146,20 @@ class TournamentController:
         """Démarre le tournoi sélectionné."""
         print(f"Au début de la méthode start_selected_tournament : {tournament.tournament_name}")
 
-        # Chargez les tournois existants
-        tournaments = Tournament.load_tournaments()
+        # Modifiez l'état du tournoi
+        if tournament.etat_tournoi == TO_LAUNCH:
+            tournament.start_tournament(tournament.tournament_id)
 
-        # Trouvez l'index du tournoi dans la liste
-        for existing_tournament in tournaments:
-            if existing_tournament.tournament_id == tournament.tournament_id:
-                print(f"Avant le changement d'état : {existing_tournament.tournament_name}")
-                
-                # Modifiez l'état du tournoi
-                if existing_tournament.etat_tournoi == TO_LAUNCH:
-                    existing_tournament.start_tournament(existing_tournament.tournament_id)
+            # Obtenez la liste des joueurs inscrits au tournoi
+            players_ids = tournament.players_ids
 
-                    # Rechargez la liste des tournois après la mise à jour
-                    tournaments = Tournament.load_tournaments()
+            # Appel au contrôleur de round pour débuter l'entrée des résultats
+            round_controller = roundController()
+            round_controller.start_rounds(tournament, tournament.tournament_id, players_ids)
 
-                    # Obtenez la liste des joueurs inscrits au tournoi
-                    players_ids = existing_tournament.players_ids
-
-                    # Appel au contrôleur de round pour débuter l'entrée des résultats
-                    round_controller = roundController()
-                    round_controller.start_rounds(existing_tournament, existing_tournament.tournament_id, players_ids)
-
-                    print("Le tournoi a été lancé avec succès.")
-                    break
-                elif existing_tournament.etat_tournoi == IN_PROGRESS:
-                    print("Le tournoi est déjà en cours.")
-                else:
-                    print("Le tournoi ne peut pas être lancé dans son état actuel.")
-
-   
-    
-
-
+            print("Le tournoi a été lancé avec succès.")
+        elif tournament.etat_tournoi == IN_PROGRESS:
+            print("Le tournoi est déjà en cours.")
+        else:
+            print("Le tournoi ne peut pas être lancé dans son état actuel. dans start selected tournament")
 
