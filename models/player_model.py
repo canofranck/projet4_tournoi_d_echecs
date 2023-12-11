@@ -120,3 +120,20 @@ class Player:
         all_players = cls.load_players()  # Chargez tous les joueurs
         selected_players = [player for player in all_players if player.player_id in players_ids]
         return selected_players
+
+    def to_dict(self):
+        """Convertit l'objet Player en un dictionnaire."""
+        return {
+            "last_name": self.last_name,
+            "first_name": self.first_name,
+            "birth_date": self.birth_date,
+            "player_id": self.player_id,
+            "score_tournament": self.score_tournament
+        }
+
+    def update_scores(self, match_result):
+        """Met à jour le score du joueur en fonction du résultat du match."""
+        if match_result == "win":
+            self.score_tournament += 1
+        elif match_result == "draw":
+            self.score_tournament += 0.5

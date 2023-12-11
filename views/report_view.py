@@ -25,7 +25,6 @@ class ReportView:
         print("Option invalide. Veuillez choisir une option valide pour" +
               "les rapports.")
 
-    # Ajoutez d'autres fonctions pour l'affichage des différents rapports ici
     @staticmethod
     def prompt_save_report():
         """

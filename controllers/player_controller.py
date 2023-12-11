@@ -11,8 +11,6 @@ class PlayerController:
         """Initialise le contrôleur des joueurs."""
         self.players = []
         self.player_view = PlayerView()
-        # Chargez les joueurs à partir du fichier JSON lors de l'initialisation
-        # self.load_players('players.json')
 
     def run_player_menu(self, main_view):
         """Exécute le menu des joueurs.
@@ -56,8 +54,6 @@ class PlayerController:
         birth_date = player_data['birth_date']
         player_id = player_data['player_id']
         score_tournament = player_data['score_tournament']
-        # vérifications supplémentaires ici,valider la date au format requis
-
         player = Player(last_name,
                         first_name,
                         birth_date,
@@ -85,5 +81,5 @@ class PlayerController:
         """
         # controller appel le model
         players = Player.load_players()
-        # controller appeler la vue pour afficher les joueurs
+        # controller appele la vue pour afficher les joueurs
         self.player_view.afficher_list(players)

@@ -62,7 +62,7 @@ class TournamentController:
         tournament_date = tournament_data['tournament_date']
         number_of_tours = tournament_data['number_of_tours']
         description = tournament_data['description']
-        # Utilisez la méthode select_players_for_tournament pour permettre à l'utilisateur de sélectionner les joueurs
+        # Utilise la méthode select_players_for_tournament pour permettre à l'utilisateur de sélectionner les joueurs
         players_ids = self.select_players_for_tournament()
 
         new_tournament = Tournament(
@@ -146,11 +146,11 @@ class TournamentController:
         """Démarre le tournoi sélectionné."""
         print(f"Au début de la méthode start_selected_tournament : {tournament.tournament_name}")
 
-        # Modifiez l'état du tournoi
+        # Modifie l'état du tournoi
         if tournament.etat_tournoi == TO_LAUNCH:
             tournament.start_tournament(tournament.tournament_id)
 
-            # Obtenez la liste des joueurs inscrits au tournoi
+            # Obtenir la liste des joueurs inscrits au tournoi
             players_ids = tournament.players_ids
 
             # Appel au contrôleur de round pour débuter l'entrée des résultats

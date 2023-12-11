@@ -3,6 +3,7 @@ import json
 # from constantes import DATA_FOLDER
 # from constantes import FILE_NAME
 from constantes import TO_LAUNCH, IN_PROGRESS, FINISH
+from models.round_model import Round
 
 
 class Tournament:
@@ -56,12 +57,13 @@ class Tournament:
 
         # Parcours la liste des tours du tournoi
         for tour in self.list_of_tours:
-            try:
-                # Tente de convertir chaque tour en un dictionnaire en appelant sa méthode to_dict()
+            if isinstance(tour, Round):
+                # Si le tour est une instance de la classe Round, appelez sa méthode to_dict()
                 list_of_tours_data.append(tour.to_dict())
-            except AttributeError:
-                # Si le tour n'a pas de méthode to_dict(), ajoute simplement le tour à la liste
+            else:
+                # Sinon, ajoutez simplement le tour à la liste
                 list_of_tours_data.append(tour)
+
         return {
             "tournament_name": self.tournament_name,
             "location": self.location,
@@ -183,6 +185,13 @@ class Tournament:
 
         # Sauvegardez la liste mise à jour dans le fichier JSON
         Tournament.save_tournaments(tournaments)
-        
+
+    def get_round_by_number(self, round_number):
+        """Récupère un round spécifique par son numéro."""
+        for round_data in self.list_of_tours:
+            if round_data.get("round_name") == f"Round {round_number}":
+                return round_data
+        return None  # Retourne None si le round n'est pas trouvé
+
         
 
