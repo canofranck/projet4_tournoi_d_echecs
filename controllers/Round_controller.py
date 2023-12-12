@@ -30,7 +30,10 @@ class roundController:
             else:
                 previous_results = self.get_previous_results(tournament, round_number - 1)
                 print("")
-                new_round.create_pairs_based_on_results(players, previous_results)
+                pairs = self.generate_pairs_for_next_round(players, previous_results)
+                for pair in pairs:
+                    print(f"Pair: {pair['player1']['last_name']} vs {pair['player2']['last_name']}")
+                # new_round.create_pairs_based_on_results(players, previous_results)
             print(f"After if: round_number={round_number}")
             # Ajoute le tour à la liste des tours du tournoi
             selected_tournament.add_tour_to_list(new_round)
@@ -53,23 +56,32 @@ class roundController:
         for match in round.matches:
             # Logique pour simuler le déroulement du match
             # demande les scores aux utilisateurs
-            print("Avant la saisie du score1")
-            match.score1 = int(input(f"Score de {match.player1.first_name} {match.player1.last_name}: "))
-            print("Après la saisie du score1")
+            print(f"Avant la saisie du score pour "
+                  f"{match.player1.first_name} {match.player1.last_name} vs "
+                  f"{match.player2.first_name} {match.player2.last_name}")
 
-            print("Avant la saisie du score2")
-            match.score2 = int(input(f"Score de {match.player2.first_name} {match.player2.last_name}: "))
-            print("Après la saisie du score2")
-            # Mets à jour les scores des joueurs
-            if match.score1 > match.score2:
-                match.player1.update_scores("win")
-                match.player2.update_scores("lose")
-            elif match.score1 < match.score2:
-                match.player1.update_scores("lose")
-                match.player2.update_scores("win")
+            # Saisie des scores par les utilisateurs
+            score1 = int(input(f"Score de {match.player1.first_name} {match.player1.last_name}: "))
+            score2 = int(input(f"Score de {match.player2.first_name} {match.player2.last_name}: "))
+
+            # Mettez à jour les scores des joueurs
+            match.score1 = score1
+            match.score2 = score2
+
+            if score1 > score2:
+                match_result = ((match.player1.player_id, 1), (match.player2.player_id, 0))
+            elif score1 < score2:
+                match_result = ((match.player1.player_id, 0), (match.player2.player_id, 1))
             else:
-                match.player1.update_scores("draw")
-                match.player2.update_scores("draw")
+                match_result = ((match.player1.player_id, 0.5), (match.player2.player_id, 0.5))
+
+            # Imprimez le résultat du match (vous pouvez le commenter si vous ne le voulez pas)
+            print("Résultat du match:", match_result)
+
+            # Mettez à jour les scores des joueurs dans le tournoi
+            for player_id, score in match_result:
+                player = next(player for player in [match.player1, match.player2] if player.player_id == player_id)
+                player.update_scores(score)
 
     def get_previous_results(self, tournament, round_number):
         """Récupère les résultats des rounds précédents."""
@@ -90,3 +102,36 @@ class roundController:
 
             # Mets à jour le tournoi avec les nouvelles valeurs
             Tournament.update_tournament(tournament_id, {"list_of_tours": selected_tournament.list_of_tours})
+
+    def generate_pairs_for_next_round(self, players, previous_results):
+        """
+        Trie les joueurs en fonction de leur nombre total de points dans le tournoi.
+
+        Args:
+            players (list): Liste des joueurs à trier.
+            previous_results (list): Résultats des rounds précédents pour éviter les matchs identiques.
+
+        Returns:
+            list: Liste de paires de joueurs pour le prochain round.
+        """
+        # Triez les joueurs par nombre total de points
+        sorted_players = sorted(players, key=lambda x: x.score_tournament, reverse=True)
+
+        # Initialisez la liste de paires
+        pairs = []
+
+        # Créez des paires en associant les joueurs dans l'ordre
+        for i in range(0, len(sorted_players), 2):
+            player1 = sorted_players[i]
+            player2 = sorted_players[i + 1] if i + 1 < len(sorted_players) else None
+
+            # Évitez les matchs identiques en vérifiant les résultats précédents
+            while player2 and (player1.player_id, player2.player_id) in previous_results:
+                i += 1
+                player2 = sorted_players[i + 1] if i + 1 < len(sorted_players) else None
+
+            if player2:
+                pairs.append({"player1": player1.to_dict(), "player2": player2.to_dict()})
+
+        return pairs
+

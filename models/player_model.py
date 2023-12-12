@@ -137,3 +137,7 @@ class Player:
             self.score_tournament += 1
         elif match_result == "draw":
             self.score_tournament += 0.5
+            
+    def to_list(self):
+        """Convertit l'objet Player en une liste."""
+        return [self.player_id, self.score]

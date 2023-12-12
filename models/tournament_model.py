@@ -58,8 +58,28 @@ class Tournament:
         # Parcours la liste des tours du tournoi
         for tour in self.list_of_tours:
             if isinstance(tour, Round):
-                # Si le tour est une instance de la classe Round, appelez sa méthode to_dict()
-                list_of_tours_data.append(tour.to_dict())
+                # Si le tour est une instance de la classe Round
+                tour_data = {
+                    "round_name": tour.round_name,
+                    "start_time": tour.start_time.isoformat() if tour.start_time else None,
+                    "end_time": tour.end_time.isoformat() if tour.end_time else None,
+                    # "matches": [
+                    #     (match.player1.player_id, match.score1, match.player2.player_id, match.score2)
+                    #     for match in tour.matches
+                    # ]
+                    "matches": [
+                        (
+                            [match.player1.player_id, match.score1],
+                            [match.player2.player_id, match.score2]
+                        )
+                        for match in tour.matches
+                    ]
+                }
+                # Ajout du print pour les matches
+                matches_data = tour_data.get("matches", [])
+                print(f"Matches data in tournament_model: {matches_data}")
+
+                list_of_tours_data.append(tour_data)
             else:
                 # Sinon, ajoutez simplement le tour à la liste
                 list_of_tours_data.append(tour)
