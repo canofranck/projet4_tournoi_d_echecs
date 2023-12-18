@@ -141,3 +141,13 @@ class Player:
     def to_list(self):
         """Convertit l'objet Player en une liste."""
         return [self.player_id, self.score]
+
+    @classmethod
+    def get_player_by_id(cls, player_id):
+        """Récupère les informations d'un joueur par son ID."""
+        players = cls.load_players()
+        for player in players:
+            if player.player_id == player_id:
+                return player
+        return None  # Retourne None si le joueur n'est pas trouvé
+

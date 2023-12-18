@@ -74,7 +74,7 @@ class TournamentController:
             players_ids=players_ids
         )
         self.tournaments.append(new_tournament)
-        new_tournament.save()
+        new_tournament.save_instance()
         print("Tournoi créer avec succès dans la sauvegarde!")
         return new_tournament
 
@@ -133,9 +133,9 @@ class TournamentController:
             choice = int(input("Veuillez sélectionner le numéro du tournoi à lancer : "))
             if 1 <= choice <= len(ongoing_tournaments):
                 selected_tournament_index = choice - 1
-                print(f"Avant la boucle : {ongoing_tournaments[selected_tournament_index].tournament_name}")
+                # print(f"Avant la boucle : {ongoing_tournaments[selected_tournament_index].tournament_name}")
                 selected_tournament = ongoing_tournaments[selected_tournament_index]
-                print(f"Avant le lancement : {selected_tournament.tournament_name}")
+                # print(f"Avant le lancement : {selected_tournament.tournament_name}")
                 self.start_selected_tournament(selected_tournament)
             else:
                 TournamentView.display_invalid_choice()
@@ -144,7 +144,7 @@ class TournamentController:
 
     def start_selected_tournament(self, tournament):
         """Démarre le tournoi sélectionné."""
-        print(f"Au début de la méthode start_selected_tournament : {tournament.tournament_name}")
+        # print(f"Au début de la méthode start_selected_tournament : {tournament.tournament_name}")
 
         # Modifie l'état du tournoi
         if tournament.etat_tournoi == TO_LAUNCH:

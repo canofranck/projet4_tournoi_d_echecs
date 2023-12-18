@@ -23,6 +23,7 @@ class Tournament:
         tournament_id=None,
         etat_tournoi=None
     ):
+        """Initialize a Tournament instance."""
         self.tournament_name = tournament_name
         self.location = location
         self.tournament_date = tournament_date
@@ -44,18 +45,15 @@ class Tournament:
 
     @staticmethod
     def load():
-        # Charge les données depuis le fichier JSON
+        """Load data from the JSON file."""
         if os.path.exists(Tournament.FILE_PATH):
             with open(Tournament.FILE_PATH, 'r') as file:
                 return json.load(file)
         return []
 
     def to_dict(self):
-        """Convertit l'objet Tournament en un dictionnaire."""
-        # Crée une liste vide pour stocker les données des tours du tournoi
+        """Convert the Tournament object to a dictionary."""
         list_of_tours_data = []
-
-        # Parcours la liste des tours du tournoi
         for tour in self.list_of_tours:
             if isinstance(tour, Round):
                 # Si le tour est une instance de la classe Round
@@ -63,10 +61,6 @@ class Tournament:
                     "round_name": tour.round_name,
                     "start_time": tour.start_time.isoformat() if tour.start_time else None,
                     "end_time": tour.end_time.isoformat() if tour.end_time else None,
-                    # "matches": [
-                    #     (match.player1.player_id, match.score1, match.player2.player_id, match.score2)
-                    #     for match in tour.matches
-                    # ]
                     "matches": [
                         (
                             [match.player1.player_id, match.score1],
@@ -75,9 +69,9 @@ class Tournament:
                         for match in tour.matches
                     ]
                 }
-                # Ajout du print pour les matches
-                matches_data = tour_data.get("matches", [])
-                print(f"Matches data in tournament_model: {matches_data}")
+                # Ajout du print pour les matches A SUPPRIMER apres TEST
+                # matches_data = tour_data.get("matches", [])
+                # print(f"Matches data in tournament_model: {matches_data}")
 
                 list_of_tours_data.append(tour_data)
             else:
@@ -96,8 +90,8 @@ class Tournament:
             "tournament_id": self.tournament_id
         }
 
-    def save(self):
-        """Sauvegarde l'objet Tournament dans un fichier JSON."""
+    def save_instance(self):
+        """Save the Tournament object to a JSON file."""
         file_path = Tournament.FILE_PATH
         tournament_dict = self.to_dict()
 
@@ -119,7 +113,7 @@ class Tournament:
 
     @staticmethod
     def get_next_tournament_id():
-        """Récupère le prochain ID de tournoi à partir du fichier JSON."""
+        """Get the next tournament ID from the JSON file."""
         data = Tournament.load()
         # Vérifie si la liste data est vide
         if not data:
@@ -133,7 +127,7 @@ class Tournament:
 
     @staticmethod
     def load_tournaments():
-        """Charge la liste des tournois depuis le fichier JSON."""
+        """Load the list of tournaments from the JSON file."""
         file_path = Tournament.FILE_PATH
 
         if os.path.exists(file_path):
@@ -145,25 +139,25 @@ class Tournament:
 
     @classmethod
     def from_dict(cls, tournament_data):
-        """Crée une instance de Tournament à partir d'un dictionnaire."""
+        """Create an instance of Tournament from a dictionary."""
         return cls(**tournament_data)
 
     def start_tournament(self, tournament_id):
-        """Démarre le tournoi en mettant à jour l'état."""
+        """Start the tournament by updating the state."""
         if self.etat_tournoi == TO_LAUNCH:
-            print(f"Avant la mise à jour de l'état dans start_tournament : {self.etat_tournoi}")
+            # print(f"Avant la mise à jour de l'état dans start_tournament : {self.etat_tournoi}")
             updated_values = {"etat_tournoi": IN_PROGRESS}
             Tournament.update_tournament(tournament_id, updated_values)
             self.etat_tournoi = IN_PROGRESS
-            print(f"Après la mise à jour de l'état dans start_tournament : {self.etat_tournoi}")
+            # print(f"Après la mise à jour de l'état dans start_tournament : {self.etat_tournoi}")
         
     def end_tournament(self):
-        """Termine le tournoi en mettant à jour l'état."""
+        """Finish the tournament by updating the state."""
         self.etat_tournoi = FINISH
 
     @staticmethod
     def save_tournaments(tournaments):
-        """Sauvegarde la liste des tournois dans un fichier JSON."""
+        """"Save the list of tournaments to a JSON file"""
         file_path = Tournament.FILE_PATH
 
         # Convertir la liste des tournois en une liste de dictionnaires
@@ -177,12 +171,13 @@ class Tournament:
             json.dump(tournaments_data, json_file, indent=2)
 
     def add_tour_to_list(self, round):
-        """Ajoute un tour à la liste des tours du tournoi."""
+        """Add a round to the list of rounds in the tournament."""
         self.list_of_tours.append(round)
+        print(f"Tour {round.round_name} ajouté à la liste des tours du tournoi.")
 
     @classmethod
     def load_tournament_by_id(cls, tournament_id):
-        """Charge un tournoi spécifique en fonction de son identifiant."""
+        """"Load a specific tournament based on its identifier."""
         tournaments = cls.load_tournaments()
 
         for tournament in tournaments:
@@ -194,7 +189,7 @@ class Tournament:
 
     @staticmethod
     def update_tournament(tournament_id, updated_values):
-        """Met à jour les valeurs d'un tournoi spécifique."""
+        """Update the values of a specific tournament."""
         tournaments = Tournament.load_tournaments()
 
         for tournament in tournaments:
@@ -207,11 +202,14 @@ class Tournament:
         Tournament.save_tournaments(tournaments)
 
     def get_round_by_number(self, round_number):
-        """Récupère un round spécifique par son numéro."""
-        for round_data in self.list_of_tours:
-            if round_data.get("round_name") == f"Round {round_number}":
-                return round_data
-        return None  # Retourne None si le round n'est pas trouvé
+        """Retrieve a specific round by its number."""
+        for i, round_data in enumerate(self.list_of_tours):
+            if round_data.get("round_name") == f"Round {round_number}" and i > 0:
+                return self.list_of_tours[i - 1]  # Utilisez get() pour éviter le KeyError
+        print(f"Debug: Round {round_number} not found in the list of tournament rounds.")
+        return None
+
+
 
         
 
