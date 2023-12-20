@@ -39,7 +39,9 @@ class roundController:
                 # print("\napres get previous result :", previous_results)
                 
                 # new_round.create_random_pairs(players)
+                
                 pairs, _ = new_round.generate_pairs_for_next_round(players, previous_results, sorted_players)
+                
                 print("\nprochaine pair pour le round en cours :")
                 for pair in pairs:
                     player1 = f"{pair['player1']['last_name']} {pair['player1']['first_name']}"

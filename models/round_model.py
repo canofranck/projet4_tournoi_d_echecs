@@ -23,14 +23,14 @@ class Round:
         """Crée des paires aléatoires pour le round."""
         random.shuffle(players)
         pairs = [(players[i], players[i + 1]) for i in range(0, len(players), 2)]
-        
+
         # Initialise la liste des matches dans le tour
         self.matches = []
-        
+
         for pair in pairs:
             player1 = pair[0]
             player2 = pair[1]
-            
+
             # Crée un objet Match et ajoute-le à la liste des matches du tour
             match = Match(player1, player2)
             self.matches.append(match)
@@ -41,58 +41,97 @@ class Round:
     def generate_pairs_for_next_round(self, players, previous_results, sorted_players):
         print("Classement des joueurs dans generate pair for next round:")
         pairs = []
-
         # Fonction de comparaison personnalisée pour le tri des joueurs
+
         def custom_sort(player_info):
             _, score, player = player_info
             return (-score, player.last_name, player.first_name)
 
         # Chargez les informations complètes des joueurs pour trier par nom et prénom
-        sorted_players_info = [(player_id, score,
-                                Player.get_player_by_id(player_id)) for player_id, score in sorted_players]
+        sorted_players_info = [(player_id, score, Player.get_player_by_id(player_id))
+                               for player_id, score in sorted_players]
         sorted_players_info = sorted(sorted_players_info, key=custom_sort)
-        
-        # Affichez le classement des joueurs après le tri
+
         for player_id, points, player in sorted_players_info:
             print(f"{player.first_name} {player.last_name}: {points} points")
         print("\ndans generate pairs for next round : previous result :", previous_results)
         # Utilisé pour suivre les joueurs déjà appariés dans ce round
         paired_players = set()
-        
+        players_set = set()
+
+        # Iteration sur chaque paire dans previous_results
+        for pair in previous_results:
+            # Extraction des identifiants des joueurs de la paire actuelle
+            current_pair_ids = frozenset([player[0] for player in pair])
+
+            # Ajout des identifiants à l'ensemble
+            players_set.add(current_pair_ids)
+
         # Utilisé pour suivre les paires déjà utilisées
         used_pairs = set()
 
-        for i in range(0, len(sorted_players_info), 2):
-            player1_id, points1, player1 = sorted_players_info[i]
-            player2_id, points2, player2 = sorted_players_info[i + 1]
+        # Les deux premiers joueurs du classement
+        i = 0
+        while i < len(sorted_players_info) - 1:
+            player_id, points, player = sorted_players_info[i]
 
-            # Créez une paire
-            current_pair = frozenset([player1_id, player2_id])
+            # Vérifiez si le joueur a déjà été apparié
+            if player_id not in paired_players:
+                # Cherchez le joueur suivant disponible
+                j = i + 1
+                while j < len(sorted_players_info):
+                    next_player_id, next_points, next_player = sorted_players_info[j]
+                    next_pair = frozenset([player_id, next_player_id])
 
-            # Vérifiez si la paire a déjà été utilisée et si elle n'est pas présente dans les paires du tour précédent
-            while current_pair in used_pairs or any(current_pair in round_pair for round_pair in previous_results):
-                i += 2
-                if i >= len(sorted_players_info):
-                    # Si nous avons atteint la fin de la liste, revenons au début
-                    i = 0
-                player1_id, points1, player1 = sorted_players_info[i]
-                player2_id, points2, player2 = sorted_players_info[i + 1]
-                current_pair = frozenset([player1_id, player2_id])
+                    # Vérifie si la paire a déjà été utilisée ou si elle a été jouée au tour précédent
+                    if not any(
+                        next_pair == prev_pair or next_pair in used_pairs or prev_pair in used_pairs
+                        for prev_pair in players_set
+                    ):
+                        # Ajoute les joueurs à la paire et les suivre dans l'ensemble
+                        pairs.append({"player1": player.to_dict(), "player2": next_player.to_dict()})
+                        paired_players.add(player_id)
+                        paired_players.add(next_player_id)
 
-            # Ajoutez les joueurs à la paire et suivez-les dans l'ensemble
+                        # Ajoute la paire à l'ensemble des paires utilisées
+                        used_pairs.add(next_pair)
+
+                        # Ajoute la paire à la liste des matchs
+                        match = Match(player, next_player)
+                        self.matches.append(match)
+
+                        # Supprime les joueurs appariés de la liste sorted_players_info
+                        sorted_players_info = [p for p in sorted_players_info if p[0]
+                                               not in (player_id, next_player_id)]
+
+                        i = -1  # reprends a zero dans la list sorted_players_info vue que les index on changer
+                        # Sort de la boucle interne une fois la paire validée
+                        break
+
+                    # Incrémente l'indice pour passer au joueur suivant
+                    j += 1
+
+                # Assure que la boucle ne continue pas indéfiniment
+                i += 1
+
+        # Ajoute la dernière paire manquante avec les joueurs restants
+        if len(sorted_players_info) == 2:
+            player1_id, points1, player1 = sorted_players_info[0]
+            player2_id, points2, player2 = sorted_players_info[1]
+            remaining_pair = frozenset([player1_id, player2_id])
+
+            # Ajoute les joueurs à la paire et les suit dans l'ensemble
             pairs.append({"player1": player1.to_dict(), "player2": player2.to_dict()})
-            paired_players.add(player1_id)
-            paired_players.add(player2_id)
 
-            # Ajoutez la paire à l'ensemble des paires utilisées
-            used_pairs.add(current_pair)
+            # Ajoute la paire à l'ensemble des paires utilisées
+            used_pairs.add(remaining_pair)
 
-            # Ajoutez la paire à la liste des matchs
+            # Ajoute la paire à la liste des matchs
             match = Match(player1, player2)
             self.matches.append(match)
 
         return pairs, self.matches
-        
+
     def to_dict(self):
         """Convertit l'objet en un dictionnaire."""
         result = {
@@ -107,7 +146,7 @@ class Round:
                 for match in self.matches
             ]
         }
-        
+
         return result
 
     @classmethod
