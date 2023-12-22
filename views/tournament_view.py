@@ -1,3 +1,4 @@
+from datetime import datetime
 from constantes import TO_LAUNCH, IN_PROGRESS
 
 
@@ -10,18 +11,51 @@ class TournamentView:
         print("1. Nouveau tournoi")
         print("2. Afficher les tournois")
         print("3. Lancer un tournoi")
-        print("4. pour. Quitter")
+        print("4. Reprendre un tournoi en cours")
+        print("5. pour. Quitter")
         choice = input("Veuillez choisir une option: ")
         return choice
 
     def get_tournament_data(self):
         """Récupère les données d'un nouveau tournoi auprès de l'utilisateur."""
         tournament_data = {}
-        tournament_data['tournament_name'] = input("Nom du tournoi: ")
-        tournament_data['location'] = input("Lieu du tournoi: ")
-        tournament_data['tournament_date'] = input("Date du tournoi: ")
-        tournament_data['number_of_tours'] = int(input("Nombre de tours: "))
-        tournament_data['description'] = input("Description du tournoi: ")
+        while True:
+            tournament_data['tournament_name'] = input("Nom du tournoi: ")
+            if tournament_data['tournament_name']:
+                break
+            else:
+                print("Le nom du tournoi ne peut pas être vide. Réessayez.")
+        while True:      
+            tournament_data['location'] = input("Lieu du tournoi: ")
+            if tournament_data['location']:
+                break
+            else:
+                print("Le lieu du tournoi ne peut pas être vide. Réessayez.")
+        while True:
+            tournament_data['tournament_date'] = input("Date du tournoi: (au format JJ/MM/AAAA) : ")
+            try:
+                # Essayer de convertir la chaîne en objet datetime
+                datetime.strptime(tournament_data['tournament_date'], "%d/%m/%Y")
+
+                # La conversion a réussi, la date est valide
+                print("La date est conforme.")
+                break  # Sortir de la boucle si la date est conforme
+            except ValueError:
+                # La conversion a échoué, la date n'est pas valide
+                print("Format de date invalide. Assurez-vous d'utiliser " +
+                      "le format JJ/MM/AAAA. Réessayez.")
+        while True:
+            try:
+                tournament_data['number_of_tours'] = int(input("Nombre de tours: "))
+                break
+            except ValueError:
+                print("Le nombre de tours du  tournoi doit etre un entier. Réessayez.")
+        while True:    
+            tournament_data['description'] = input("Description du tournoi: ")
+            if tournament_data['description']:
+                break
+            else:
+                print("La description du tournoi ne peut pas être vide. Réessayez.")
         # tournament_data['players_ids'] = input("Liste des ID des joueurs séparés par des virgules: ").split(',')
         return tournament_data
 

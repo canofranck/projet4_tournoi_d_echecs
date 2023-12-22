@@ -209,7 +209,25 @@ class Tournament:
         print(f"Debug: Round {round_number} not found in the list of tournament rounds.")
         return None
 
+    @staticmethod
+    def load_tournaments_with_rounds():
+        """Charge les tournois avec les informations sur les rounds depuis le fichier JSON."""
+        file_path = Tournament.FILE_PATH
 
+        if os.path.exists(file_path):
+            with open(file_path, "r") as json_file:
+                data = json.load(json_file)
+                return [Tournament.from_dict_with_rounds(tournament_data) for tournament_data in data]
 
-        
+        return []
 
+    @staticmethod
+    def from_dict_with_rounds(data):
+        """Crée une instance de la classe Tournament à partir d'un dictionnaire avec informations sur les rounds."""
+        tournament = Tournament(
+      
+        )
+
+        tournament.list_of_tours = [Round.from_dict(round_data) for round_data in data.get("list_of_tours", [])]
+
+        return tournament

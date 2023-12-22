@@ -21,10 +21,10 @@ class Match:
     @classmethod
     def from_dict(cls, match_data):
         """Crée une instance de Match à partir d'un dictionnaire."""
-        player1_id, score1 = match_data[0][0]
-        player2_id, score2 = match_data[0][1]
+        player1_id, score1 = match_data[0]  # [0]
+        player2_id, score2 = match_data[1]  # [1]
 
-        player1 = Player(player_id=player1_id)
-        player2 = Player(player_id=player2_id)
+        player1 = Player.load_players_by_ids(player1_id)
+        player2 = Player.load_players_by_ids(player2_id)
 
         return cls(player1, player2, score1, score2)
