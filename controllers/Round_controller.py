@@ -17,8 +17,8 @@ class roundController:
         # Charge l'instance spécifique du tournoi à partir du fichier JSON
         selected_tournament = Tournament.load_tournament_by_id(tournament_id)
         players = Player.load_players_by_ids(players_ids)  # Chargez uniquement les joueurs inscrits
-        print("\nDebug: Loaded players:", players)
-        print("\nDebug: Loaded tournament data:", selected_tournament.to_dict())
+        # print("\nDebug: Loaded players:", players)
+        # print("\nDebug: Loaded tournament data:", selected_tournament.to_dict())
         """Démarre les rounds d'un tournoi."""
         number_of_rounds = selected_tournament.number_of_tours
         print("\nce tournoi a ", number_of_rounds, " tours")
@@ -125,7 +125,7 @@ class roundController:
                     player2_id, _ = pair[1]
                     print(f"Pair: {player1_id} vs {player2_id}")
                 break
-        print(f"Debug: Length of previous_results after loop: {len(previous_results)}")
+        # print(f"Debug: Length of previous_results after loop: {len(previous_results)}")
         return previous_results
 
     def update_matches_in_round(self, round_number, tournament_id, updated_matches):

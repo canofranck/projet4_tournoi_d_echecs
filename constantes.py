@@ -12,6 +12,7 @@ PLAYER_MENU_QUIT = "3"
 # Dossier et Nom fichier
 DATA_FOLDER = 'data'
 FILE_NAME = "players.json"
+FILE_NAME2 = "tournament.json"
 
 # Tournament Menu
 TOURNAMENT_MENU_NOUVEAU = "1"
