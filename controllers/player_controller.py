@@ -53,11 +53,13 @@ class PlayerController:
         first_name = player_data['first_name']
         birth_date = player_data['birth_date']
         player_id = player_data['player_id']
+        player_id_national = player_data['player_id_national']
         score_tournament = player_data['score_tournament']
         player = Player(last_name,
                         first_name,
                         birth_date,
                         player_id,
+                        player_id_national,
                         score_tournament)
         # Vérifiez s'il y a des doublons en fonction de l'identifiant du joueur
      

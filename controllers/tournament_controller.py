@@ -104,8 +104,8 @@ class TournamentController:
         selected_players = []
         print("Liste des joueurs disponibles:")
         for i, player in enumerate(players, start=1):
-            print(f"{i}. {player.first_name} {player.last_name} ({player.player_id})")
-
+            print(f"{i}. {player.first_name} {player.last_name}")
+            # print(f"{i}. {player.first_name} {player.last_name} ({player.player_id})")
         while True:
             try:
                 selection = input("Entrez les numéros des joueurs sélectionnés, séparés par des virgules: ")

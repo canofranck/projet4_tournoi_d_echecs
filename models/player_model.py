@@ -11,6 +11,7 @@ class Player:
                  first_name,
                  birth_date,
                  player_id,
+                 player_id_national,
                  score_tournament
                  ):
         """
@@ -28,6 +29,7 @@ class Player:
         self.first_name = first_name
         self.birth_date = birth_date
         self.player_id = player_id
+        self.player_id_national = player_id_national
         self.score_tournament = score_tournament
 
     @staticmethod
@@ -58,6 +60,7 @@ class Player:
                     data['first_name'],
                     data['birth_date'],
                     data['player_id'],
+                    data['player_id_national'],
                     data['score_tournament']
                 )
                 players.append(player)
@@ -85,9 +88,10 @@ class Player:
                     "first_name": p.first_name,
                     "birth_date": p.birth_date,
                     "player_id": p.player_id,
+                    "player_id_national": p.player_id_national,
                     "score_tournament": p.score_tournament
                 })
-        with open(file_path, 'w') as file:  
+        with open(file_path, 'w') as file:
             json.dump(players_data, file, indent=4)
 
     @staticmethod
@@ -128,16 +132,10 @@ class Player:
             "first_name": self.first_name,
             "birth_date": self.birth_date,
             "player_id": self.player_id,
+            "player_id_national": self.player_id_national,
             "score_tournament": self.score_tournament
         }
 
-    # def update_scores(self, match_result):
-    #     """Met à jour le score du joueur en fonction du résultat du match."""
-    #     if match_result == "win":
-    #         self.score_tournament += 1
-    #     elif match_result == "draw":
-    #         self.score_tournament += 0.5
-            
     def to_list(self):
         """Convertit l'objet Player en une liste."""
         return [self.player_id, self.score]
@@ -150,4 +148,3 @@ class Player:
             if player.player_id == player_id:
                 return player
         return None  # Retourne None si le joueur n'est pas trouvé
-

@@ -1,3 +1,4 @@
+import uuid
 import constantes
 import re
 from datetime import datetime
@@ -66,10 +67,10 @@ class PlayerView:
         motif_regex = r'^[A-Za-z]{2}\d{5}$'
         while True:
             # Demande à l'utilisateur d'entrer l'identifiant du joueur
-            player_id = input("Entrez l'identifiant du joueur : ")
+            player_id_national = input("Entrez l'identifiant du joueur : ")
 
             # Vérification de la correspondance avec la regex
-            if re.match(motif_regex, player_id):
+            if re.match(motif_regex, player_id_national):
                 print("L'identifiant est conforme.")
                 break  # Sortir de la boucle si l'identifiant est conforme
             else:
@@ -78,12 +79,14 @@ class PlayerView:
 
         # score_tournament=input("Entrez le score du joueur dans le tournoi: ")
         score_tournament = 0
+        player_id = str(uuid.uuid4())
 
         return {
             'last_name': last_name,
             'first_name': first_name,
             'birth_date': birth_date,
             'player_id': player_id,
+            'player_id_national': player_id_national,
             'score_tournament': score_tournament
         }
 
