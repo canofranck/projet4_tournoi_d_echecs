@@ -1,6 +1,9 @@
 import os
+from constantes import IN_PROGRESS, TO_LAUNCH
 from models.player_model import Player
 from views.report_view import ReportView
+from models.tournament_model import Tournament
+from views.tournament_view import TournamentView
 
 
 class ReportController:
@@ -42,7 +45,7 @@ class ReportController:
         else:
             # Triez les joueurs par nom de famille, puis par prénom
             sorted_players = sorted(players,
-                                    key=lambda x: (x.last_name, x.first_name)) 
+                                    key=lambda x: (x.last_name, x.first_name))
             players_report = (
                 "Liste de tous les joueurs par ordre alphabétique :\n")
             for player in sorted_players:
@@ -62,11 +65,40 @@ class ReportController:
 
     def display_all_tournaments(self):
         """Affiche tous les tournois."""
-        pass
+        tournaments = Tournament.load_tournaments()
+
+        if not tournaments:
+            TournamentView.display_no_available_tournaments()
+            return
+        tournament_report2 = ("Liste des tournois :\n")
+        for i, tournament in enumerate(tournaments):
+
+            if tournament.etat_tournoi == TO_LAUNCH:
+                etat = "TO_LAUNCH"
+            elif tournament.etat_tournoi == IN_PROGRESS:
+                etat = "IN_PROGRESS"
+            else:
+                etat = "FINISH"
+
+            tournament_report2 += (
+                    f"Nom : {tournament.tournament_name}, Etat du tournoi : ({etat}), "
+                    f" Lieu : {tournament.location}, Date : {tournament.tournament_date}\n"
+                )
+        ReportView.display_tournaments_list(tournament_report2)
+        user_choice = self.report_view.prompt_save_report()
+        if user_choice.lower() == "o":
+            file_name = self.report_view.get_file_name_to_save()
+            self.save_report_to_file(tournament_report2, file_name)
+            self.save_report_list_tournament_with_html_template(tournament_report2, file_name)
+        else:
+            print("Le rapport n'a pas été sauvegardé.")
 
     def display_tournament_details(self):
         """Affiche les détails d'un tournoi."""
-        pass
+        tournaments = Tournament.load_tournaments()
+        if not tournaments:
+            TournamentView.display_no_available_tournaments()
+            return
 
     def display_tournament_players_alphabetically(self):
         """Affiche les joueurs d'un tournoi par ordre alphabétique."""
@@ -114,7 +146,7 @@ class ReportController:
         Args:
         report_text (str): Le texte du rapport à sauve avec le modèle HTML.
         file_name (str): Le nom du fichier de sauvegarde.
-        """  
+        """
         template_path = "templates/template.html"
         with open(template_path, 'r', encoding='utf-8') as template_file:
             template_content = template_file.read()
@@ -130,6 +162,33 @@ class ReportController:
                         .replace("ID : ", "</td><td>")
                         .replace("Classement : ", "</td><td>")
                         .replace("Score du tournoi : ", "</td><td>")
+                        .replace(",", "") + "</td></tr>")
+                    data_rows += f"<tr>{data_row}"
+            modif_template = template_content.replace(
+                                             '<!-- INSERT_DATA -->', data_rows)
+            # Enregistrer le contenu modifié dans un nouveau fichier HTML
+            self.save_report_as_html(modif_template, file_name)
+
+    def save_report_list_tournament_with_html_template(self, report_text, file_name):
+        """
+        Sauvegarde le rapport avec un modèle HTML spécifique.
+        Args:
+        report_text (str): Le texte du rapport à sauve avec le modèle HTML.
+        file_name (str): Le nom du fichier de sauvegarde.
+        """
+        template_path = "templates/template_list_tournament.html"
+        with open(template_path, 'r', encoding='utf-8') as template_file:
+            template_content = template_file.read()
+
+            # Générer le contenu HTML en utilisant les données du rapport
+            data_rows = ""
+            for line in report_text.split("\n"):
+                if line.strip():
+                    data_row = (
+                        line.replace("Nom : ", "<td>")
+                        .replace("Etat du tournoi : ", "</td><td>")
+                        .replace("Lieu : ", "</td><td>")
+                        .replace("Date : ", "</td><td>")
                         .replace(",", "") + "</td></tr>")
                     data_rows += f"<tr>{data_row}"
             modif_template = template_content.replace(

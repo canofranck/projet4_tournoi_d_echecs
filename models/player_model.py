@@ -131,12 +131,12 @@ class Player:
             "score_tournament": self.score_tournament
         }
 
-    def update_scores(self, match_result):
-        """Met à jour le score du joueur en fonction du résultat du match."""
-        if match_result == "win":
-            self.score_tournament += 1
-        elif match_result == "draw":
-            self.score_tournament += 0.5
+    # def update_scores(self, match_result):
+    #     """Met à jour le score du joueur en fonction du résultat du match."""
+    #     if match_result == "win":
+    #         self.score_tournament += 1
+    #     elif match_result == "draw":
+    #         self.score_tournament += 0.5
             
     def to_list(self):
         """Convertit l'objet Player en une liste."""

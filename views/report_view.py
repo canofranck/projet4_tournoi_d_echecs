@@ -61,3 +61,7 @@ class ReportView:
         Affiche un message indiquant que le rapport n'a pas été sauvegardé.
         """
         print("Le rapport n'a pas été sauvegardé.")
+
+    @staticmethod
+    def display_tournaments_list(text):
+        print(text)

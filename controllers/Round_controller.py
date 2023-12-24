@@ -34,15 +34,15 @@ class roundController:
                 new_round.create_random_pairs(players)
             else:
                 sorted_players = self.calculate_points_for_tournament(tournament_id)
-               
+
                 previous_results = self.get_previous_results(tournament_id, round_number)
                 # print("\nDebug: after fonction previous result\n")
                 # print("\napres get previous result :", previous_results)
-                
+
                 # new_round.create_random_pairs(players)
-                
+
                 pairs, _ = new_round.generate_pairs_for_next_round(players, previous_results, sorted_players)
-                
+
                 print("\nprochaine pair pour le round en cours :")
                 for pair in pairs:
                     player1 = f"{pair['player1']['last_name']} {pair['player1']['first_name']}"
@@ -64,16 +64,16 @@ class roundController:
             # Ajoute une impression pour vérifier la liste des tours après la mise à jour
             # print(f"Tours après la mise à jour du tournoi : {selected_tournament.list_of_tours}")
             print("\ntournoi save & FIN DU ROUND")
-        self.calculate_points_for_tournament(tournament_id)        
+        self.calculate_points_for_tournament(tournament_id)
+        selected_tournament.end_tournament(tournament_id)
         # break
 
     # def play_match(self, round):
     #     """Simule le déroulement des matches pour un round."""
-        
     #     for match in round.matches:
     #         # Logique pour simuler le déroulement du match
     #         # demande les scores aux utilisateurs
-            
+
     #         print(f"Entrez le score pour "
     #               f"{match.player1.first_name} {match.player1.last_name} vs "
     #               f"{match.player2.first_name} {match.player2.last_name}")
@@ -101,7 +101,7 @@ class roundController:
     def get_previous_results(self, tournament_id, round_number):
         """Récupère les résultats des rounds précédents."""
         previous_results = []
-       
+
         # Charge les données du tournoi depuis le fichier JSON
         selected_tournament = Tournament.load_tournament_by_id(tournament_id)
 

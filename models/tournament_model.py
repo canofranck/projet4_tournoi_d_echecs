@@ -150,10 +150,15 @@ class Tournament:
             Tournament.update_tournament(tournament_id, updated_values)
             self.etat_tournoi = IN_PROGRESS
             # print(f"Après la mise à jour de l'état dans start_tournament : {self.etat_tournoi}")
-        
-    def end_tournament(self):
+
+    def end_tournament(self, tournament_id):
         """Finish the tournament by updating the state."""
-        self.etat_tournoi = FINISH
+        if self.etat_tournoi == IN_PROGRESS:
+            # print(f"Avant la mise à jour de l'état dans start_tournament : {self.etat_tournoi}")
+            updated_values = {"etat_tournoi": FINISH}
+            Tournament.update_tournament(tournament_id, updated_values)
+            # self.etat_tournoi = IN_PROGRESS
+            # print(f"Après la mise à jour de l'état dans start_tournament : {self.etat_tournoi}")
 
     @staticmethod
     def save_tournaments(tournaments):
@@ -225,7 +230,7 @@ class Tournament:
     def from_dict_with_rounds(data):
         """Crée une instance de la classe Tournament à partir d'un dictionnaire avec informations sur les rounds."""
         tournament = Tournament(
-      
+
         )
 
         tournament.list_of_tours = [Round.from_dict(round_data) for round_data in data.get("list_of_tours", [])]

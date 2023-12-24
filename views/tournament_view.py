@@ -120,3 +120,10 @@ class TournamentView:
     def display_no_available_tournaments():
         """Affiche un message indiquant qu'aucun tournoi n'est disponible."""
         print("Aucun tournoi n'est disponible.\n")
+        
+    @staticmethod
+    def display_invalid_option_message():
+        """
+        Affiche un message indiquant qu'une option invalide a été sélectionnée.
+        """
+        print("Option invalide. Veuillez choisir une option valide.")
