@@ -3,11 +3,6 @@ from models.player_model import Player
 from models.round_model import Round
 from controllers.match_controller import MatchController
 from models.tournament_model import Tournament
-# from datetime import datetime
-# import os
-# import json
-# from constantes import DATA_FOLDER
-# from constantes import FILE_NAME
 
 
 class roundController:
@@ -63,40 +58,12 @@ class roundController:
             Tournament.update_tournament(tournament_id, {"list_of_tours": selected_tournament.list_of_tours})
             # Ajoute une impression pour vérifier la liste des tours après la mise à jour
             # print(f"Tours après la mise à jour du tournoi : {selected_tournament.list_of_tours}")
-            print("\ntournoi save & FIN DU ROUND")
-        self.calculate_points_for_tournament(tournament_id)
-        selected_tournament.end_tournament(tournament_id)
-        # break
-
-    # def play_match(self, round):
-    #     """Simule le déroulement des matches pour un round."""
-    #     for match in round.matches:
-    #         # Logique pour simuler le déroulement du match
-    #         # demande les scores aux utilisateurs
-
-    #         print(f"Entrez le score pour "
-    #               f"{match.player1.first_name} {match.player1.last_name} vs "
-    #               f"{match.player2.first_name} {match.player2.last_name}")
-
-    #         # Saisie des scores par les utilisateurs
-    #         score1 = int(input(f"Score de {match.player1.first_name} {match.player1.last_name}: "))
-    #         score2 = int(input(f"Score de {match.player2.first_name} {match.player2.last_name}: "))
-
-    #         # Mettez à jour les scores des joueurs
-    #         match.score1 = score1
-    #         match.score2 = score2
-
-    #         if score1 > score2:
-    #             match_result = ((match.player1.player_id, 1), (match.player2.player_id, 0))
-    #         elif score1 < score2:
-    #             match_result = ((match.player1.player_id, 0), (match.player2.player_id, 1))
-    #         else:
-    #             match_result = ((match.player1.player_id, 0.5), (match.player2.player_id, 0.5))
-
-    #         # Mettez à jour les scores des joueurs dans le tournoi
-    #         for player_id, score in match_result:
-    #             player = next(player for player in [match.player1, match.player2] if player.player_id == player_id)
-    #             player.update_scores(score)
+            user_choice = input("Continuez a entrer les resultats O/N : ")
+            if user_choice.lower() == "n":
+                break
+        if not (user_choice.lower()) == "n":
+            self.calculate_points_for_tournament(tournament_id)
+            selected_tournament.end_tournament(tournament_id)
 
     def get_previous_results(self, tournament_id, round_number):
         """Récupère les résultats des rounds précédents."""

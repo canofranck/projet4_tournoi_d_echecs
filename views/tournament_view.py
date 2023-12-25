@@ -1,4 +1,5 @@
 from datetime import datetime
+import uuid
 from constantes import TO_LAUNCH, IN_PROGRESS
 
 
@@ -56,6 +57,7 @@ class TournamentView:
                 break
             else:
                 print("La description du tournoi ne peut pas être vide. Réessayez.")
+        tournament_data['tournament_id'] = str(uuid.uuid4())
         # tournament_data['players_ids'] = input("Liste des ID des joueurs séparés par des virgules: ").split(',')
         return tournament_data
 

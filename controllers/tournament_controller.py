@@ -64,6 +64,7 @@ class TournamentController:
         tournament_date = tournament_data['tournament_date']
         number_of_tours = tournament_data['number_of_tours']
         description = tournament_data['description']
+        tournament_id = tournament_data['tournament_id']
         # Utilise la méthode select_players_for_tournament pour permettre à l'utilisateur de sélectionner les joueurs
         players_ids = self.select_players_for_tournament()
 
@@ -73,7 +74,8 @@ class TournamentController:
             tournament_date=tournament_date,
             number_of_tours=number_of_tours,
             description=description,
-            players_ids=players_ids
+            players_ids=players_ids,
+            tournament_id=tournament_id
         )
         self.tournaments.append(new_tournament)
         new_tournament.save_instance()

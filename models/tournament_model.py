@@ -34,14 +34,14 @@ class Tournament:
         # Si etat_tournoi est évalué à True (c'est-à-dire qu'il a une valeur autre que False, None, 0, ou une chaîne
         # vide), alors self.etat_tournoi prendra la valeur de etat_tournoi.
         self.etat_tournoi = etat_tournoi or TO_LAUNCH
-
+        self.tournament_id = tournament_id
         # Incrémente le compteur d'ID et l'assigne à l'instance actuelle
         # self.load()
         # Si l'ID n'est pas spécifié, utilise le prochain ID disponible
-        if tournament_id is None:
-            self.tournament_id = Tournament.get_next_tournament_id()
-        else:
-            self.tournament_id = tournament_id
+        # if tournament_id is None:
+        #     self.tournament_id = Tournament.get_next_tournament_id()
+        # else:
+        #     self.tournament_id = tournament_id
 
     @staticmethod
     def load():
@@ -111,19 +111,19 @@ class Tournament:
         with open(file_path, "w") as json_file:
             json.dump(existing_data, json_file, indent=2)
 
-    @staticmethod
-    def get_next_tournament_id():
-        """Get the next tournament ID from the JSON file."""
-        data = Tournament.load()
-        # Vérifie si la liste data est vide
-        if not data:
-            return 1  # Si le fichier n'existe pas, c'est le premier tournoi
+    # @staticmethod
+    # def get_next_tournament_id():
+    #     """Get the next tournament ID from the JSON file."""
+    #     data = Tournament.load()
+    #     # Vérifie si la liste data est vide
+    #     if not data:
+    #         return 1  # Si le fichier n'existe pas, c'est le premier tournoi
 
-        # Les données sont maintenant stockées dans une liste, récupérons le dernier élément
-        last_tournament = data[-1]
+    #     # Les données sont maintenant stockées dans une liste, récupérons le dernier élément
+    #     last_tournament = data[-1]
 
-        # Si 'tournament_id' est présent dans le dernier tournoi, incrémentez-le, sinon, commencez à 1
-        return last_tournament.get('tournament_id', 0) + 1
+    #     # Si 'tournament_id' est présent dans le dernier tournoi, incrémentez-le, sinon, commencez à 1
+    #     return last_tournament.get('tournament_id', 0) + 1
 
     @staticmethod
     def load_tournaments():
