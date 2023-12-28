@@ -94,9 +94,7 @@ class TournamentController:
         Raises:
             Aucune exception n'est levée.
         """
-        # controller appel le model
         tournaments = Tournament.load_tournaments()
-        # controller appeler la vue pour afficher les tournois
         self.tournament_view.afficher_list(tournaments)
 
     def select_players_for_tournament(self):
@@ -222,12 +220,8 @@ class TournamentController:
 
     def resume_selected_tournament(self, tournament):
         """Reprendre un tournoi sélectionné."""
-        # Charger les tours du tournoi en cours
-        self.load_tournaments_with_rounds()
-
         # Obtenir la liste des joueurs inscrits au tournoi
         players_ids = tournament.players_ids
-
         # Appel au contrôleur de round pour reprendre l'entrée des résultats
         round_controller = roundController()
         round_controller.resume_rounds(tournament, tournament.tournament_id, players_ids)

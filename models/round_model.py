@@ -6,6 +6,7 @@ from models.player_model import Player
 
 class Round:
     def __init__(self, round_name, start_time=None, end_time=None):
+        """Initialise une instance de Round avec un nom, une heure de début et une heure de fin optionnelles."""
         self.round_name = round_name
         self.start_time = start_time or datetime.datetime.now()
         self.end_time = end_time
@@ -39,6 +40,8 @@ class Round:
         # Ajoute les matches créés au tour actuel
 
     def generate_pairs_for_next_round(self, players, previous_results, sorted_players):
+        """Génère des paires pour le prochain tour en fonction des résultats précédents et du classement
+        des joueurs."""
         print("Classement des joueurs dans generate pair for next round:")
         pairs = []
         # Fonction de comparaison personnalisée pour le tri des joueurs
@@ -53,7 +56,7 @@ class Round:
         sorted_players_info = sorted(sorted_players_info, key=custom_sort)
 
         for player_id, points, player in sorted_players_info:
-            print(f"{player.first_name} {player.last_name}: {points} points")
+            print(f"{player.first_name} {player.last_name} {player.player_id}: {points} points")
         print("\ndans generate pairs for next round : previous result :", previous_results)
         # Utilisé pour suivre les joueurs déjà appariés dans ce round
         paired_players = set()
@@ -149,8 +152,9 @@ class Round:
 
         return result
 
+    # Dans la classe Round
     @classmethod
-    def from_dict(cls, round_data):
+    def from_dict(cls, round_data, players):
         """Crée une instance de Round à partir d'un dictionnaire."""
         round_name = round_data["round_name"]
         start_time = datetime.datetime.fromisoformat(round_data["start_time"]) if round_data["start_time"] else None
@@ -158,18 +162,23 @@ class Round:
         new_round = cls(round_name, start_time, end_time)
 
         # Modifier cette partie pour créer des instances de Match avec le format attendu
-        if "matches" in round_data and isinstance(round_data["matches"], list):
-            for match_data in round_data["matches"]:
-                new_round.matches.append(
-                    Match(
-                        Player(player_id=match_data[0][0]),
-                        Player(player_id=match_data[1][0]),
-                        match_data[0][1],
-                        match_data[1][1]
-                    )
-                )
-        else:
-            print("Invalid or missing 'matches' data in round_data")
+        matches_data = round_data.get("matches", [])
+        for match_data in matches_data:
+            if len(match_data) == 2:
+                player1_data, player2_data = match_data
+                player1_id, score1 = player1_data
+                player2_id, score2 = player2_data
+
+                # Recherchez les joueurs
+                player1 = next((player for player in players if player.player_id == player1_id), None)
+                player2 = next((player for player in players if player.player_id == player2_id), None)
+
+                if player1 and player2:
+                    new_round.matches.append(Match(player1, player2, score1, score2))
+                else:
+                    print(f"Erreur : Impossible de trouver les joueurs pour le match {match_data}")
+            else:
+                print("Format invalide pour un match :", match_data)
 
         return new_round
 

@@ -111,7 +111,12 @@ class Player:
 
     @classmethod
     def is_player_id_taken(cls, player_id):
-        """Vérifie si l'ID du joueur est déjà pris."""
+        """Vérifie si l'ID du joueur est déjà pris.
+        Args:
+            player_id (int): L'ID du joueur à vérifier.
+        Returns:
+            bool: True si l'ID est déjà pris, False sinon.
+        """
         players = Player.load_players()
         for player in players:
             if player.player_id == player_id:
@@ -120,13 +125,21 @@ class Player:
 
     @classmethod
     def load_players_by_ids(cls, players_ids):
-        """Charge les joueurs avec les IDs spécifiés."""
+        """Charge les joueurs par leur IDs spécifiés.
+        Args:
+            players_ids (list): Liste des IDs des joueurs à charger.
+        Returns:
+            list: Liste des joueurs correspondant aux IDs spécifiés.
+        """
         all_players = cls.load_players()  # Chargez tous les joueurs
         selected_players = [player for player in all_players if player.player_id in players_ids]
         return selected_players
 
     def to_dict(self):
-        """Convertit l'objet Player en un dictionnaire."""
+        """Convertit l'objet Player en un dictionnaire.
+        Returns:
+            dict: Dictionnaire représentant les attributs de l'objet Player.
+        """
         return {
             "last_name": self.last_name,
             "first_name": self.first_name,
@@ -137,12 +150,20 @@ class Player:
         }
 
     def to_list(self):
-        """Convertit l'objet Player en une liste."""
+        """Convertit l'objet Player en une liste.
+        Returns:
+            list: Liste représentant l'objet Player.
+        """
         return [self.player_id, self.score]
 
     @classmethod
     def get_player_by_id(cls, player_id):
-        """Récupère les informations d'un joueur par son ID."""
+        """Récupère les informations d'un joueur par son ID.
+        Args:
+            player_id (int): L'ID du joueur à récupérer.
+        Returns:
+            Player or None: L'objet Player correspondant à l'ID ou None si non trouvé.
+        """
         players = cls.load_players()
         for player in players:
             if player.player_id == player_id:

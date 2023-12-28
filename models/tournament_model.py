@@ -2,13 +2,13 @@ import os
 import json
 # from constantes import DATA_FOLDER
 # from constantes import FILE_NAME
-from constantes import TO_LAUNCH, IN_PROGRESS, FINISH
+from constantes import DATA_FOLDER, FILE_NAME2, TO_LAUNCH, IN_PROGRESS, FINISH
 from models.round_model import Round
 
 
 class Tournament:
     """Use to create an instance of a tournament"""
-    FILE_PATH = "data/tournament.json"
+    FILE_PATH = os.path.join(DATA_FOLDER, FILE_NAME2)
     tournament_counter = 0  # Compteur d'ID statique pour toute la classe
 
     def __init__(

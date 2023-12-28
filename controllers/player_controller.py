@@ -1,5 +1,3 @@
-# import os
-# import json
 from models.player_model import Player
 from views.player_view import PlayerView
 import constantes
@@ -81,7 +79,5 @@ class PlayerController:
         Raises:
             Aucune exception n'est levée.
         """
-        # controller appel le model
         players = Player.load_players()
-        # controller appele la vue pour afficher les joueurs
         self.player_view.afficher_list(players)

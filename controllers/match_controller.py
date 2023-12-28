@@ -1,8 +1,3 @@
-# from models.player_model import Player
-# from models.round_model import Round
-# from models.tournament_model import Tournament
-
-
 class MatchController:
 
     def play_match(round):
@@ -20,7 +15,7 @@ class MatchController:
             score1 = int(input(f"Score de {match.player1.first_name} {match.player1.last_name}: "))
             score2 = int(input(f"Score de {match.player2.first_name} {match.player2.last_name}: "))
 
-            # Mettez à jour les scores des joueurs
+            # Mettre à jour les scores des joueurs
             match.score1 = score1
             match.score2 = score2
             if score1 > score2:
