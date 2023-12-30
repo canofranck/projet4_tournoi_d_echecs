@@ -150,7 +150,8 @@ class roundController:
         number_of_rounds = selected_tournament.number_of_tours
         # Reprendre l'entrée des résultats pour chaque round
        
-        round_number = [int(re.search(r'Round (\d+)', tour['round_name']).group(1)) for tour in selected_tournament.list_of_tours]
+        round_number = [int(re.search(r'Round (\d+)', tour['round_name']).group(1))
+                        for tour in selected_tournament.list_of_tours]
         if round_number:
             dernier_numero_round = max(round_number)
             print("le dernier round est le : ", dernier_numero_round)
