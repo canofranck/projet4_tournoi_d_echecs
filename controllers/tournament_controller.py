@@ -1,6 +1,7 @@
 from models.tournament_model import Tournament
 from models.player_model import Player
 from controllers.round_controller import roundController
+from views.main_view import MainView
 from views.tournament_view import TournamentView
 import constantes
 from constantes import TO_LAUNCH, IN_PROGRESS
@@ -13,12 +14,13 @@ class TournamentController:
         """Initialise le contrôleur des tournois."""
         self.tournaments = []
         self.tournament_view = TournamentView()
+        self.main_view = MainView()
 
     def load_tournaments(self):
         """Charge les tournois depuis le fichier et met à jour self.tournaments."""
         self.tournaments = Tournament.load_tournaments()
 
-    def run_tournament_menu(self, main_view):
+    def run_tournament_menu(self):
         """Exécute le menu des tournois.
         Cette méthode permet de gérer les actions du menu des tournois,
         notamment la création de nouveaux tournois, l'affichage de la liste des
@@ -30,6 +32,7 @@ class TournamentController:
         Raises:
             Aucune exception n'est levée.
         """
+        self.main_view.clear_screen()
         while True:
             choice = self.tournament_view.display_tournament_menu()
 
@@ -57,6 +60,7 @@ class TournamentController:
         Raises:
             Aucune exception n'est levée.
         """
+        self.main_view.clear_screen()
         print("Création d'un nouveau tournoi...")
         tournament_data = self.tournament_view.get_tournament_data()
         tournament_name = tournament_data['tournament_name']
@@ -94,6 +98,8 @@ class TournamentController:
         Raises:
             Aucune exception n'est levée.
         """
+        self.main_view.clear_screen()
+
         tournaments = Tournament.load_tournaments()
         self.tournament_view.afficher_list(tournaments)
 
@@ -119,6 +125,7 @@ class TournamentController:
 
     def launch_tournament_menu(self):
         """Affiche les tournois existants et non terminés, puis permet de lancer un tournoi."""
+        self.main_view.clear_screen()
         self.load_tournaments()
         # Filtrer les tournois non terminés
         ongoing_tournaments = [t for t in self.tournaments if t.etat_tournoi == TO_LAUNCH]
@@ -162,7 +169,6 @@ class TournamentController:
             print("Le tournoi a été lancé avec succès.")
         elif tournament.etat_tournoi == IN_PROGRESS:
             print("Le tournoi est déjà en cours.")
-            
         else:
             print("Le tournoi ne peut pas être lancé dans son état actuel. dans start selected tournament")
 
@@ -170,6 +176,7 @@ class TournamentController:
         """Affiche les tournois en cours et permet à l'utilisateur de choisir
         le tournoi à reprendre.
         """
+        self.main_view.clear_screen()
         self.load_tournaments()
         ongoing_tournaments = [t for t in self.tournaments if t.etat_tournoi == IN_PROGRESS]
 

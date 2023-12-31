@@ -47,7 +47,7 @@ class ReportView:
     @staticmethod
     def display_report_saved_message(file_path):
         """
-        Affiche un message indiquant que le rapport a été sauvegardé 
+        Affiche un message indiquant que le rapport a été sauvegardé
         avec succès.
         Args:
             file_path (str): Le chemin du fichier où le rapport a été

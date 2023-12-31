@@ -1,5 +1,3 @@
-# import json
-
 from models.player_model import Player
 
 

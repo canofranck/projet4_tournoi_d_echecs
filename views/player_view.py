@@ -5,6 +5,7 @@ from datetime import datetime
 
 
 class PlayerView:
+
     @staticmethod
     def display_player_menu():
         """
@@ -40,7 +41,7 @@ class PlayerView:
                 break
             else:
                 print("Le nom de famille ne peut pas être vide. Réessayez.")
-        while True:        
+        while True:
             first_name = input("Entrez le prénom du joueur : ")
             if first_name:
                 break
@@ -96,7 +97,7 @@ class PlayerView:
         else:
             # Triez les joueurs par nom de famille, puis par prénom
             sorted_players = sorted(players,
-                                    key=lambda x: (x.last_name, x.first_name)) 
+                                    key=lambda x: (x.last_name, x.first_name))
             output_string = (
                 "Liste de tous les joueurs par ordre alphabétique :\n")
             for player in sorted_players:
@@ -107,4 +108,3 @@ class PlayerView:
                  f"Score du tournoi : {player.score_tournament}\n"
                  )
             print(output_string)
-        

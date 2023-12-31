@@ -26,7 +26,7 @@ class TournamentView:
                 break
             else:
                 print("Le nom du tournoi ne peut pas être vide. Réessayez.")
-        while True:      
+        while True:
             tournament_data['location'] = input("Lieu du tournoi: ")
             if tournament_data['location']:
                 break
@@ -51,7 +51,7 @@ class TournamentView:
                 break
             except ValueError:
                 print("Le nombre de tours du  tournoi doit etre un entier. Réessayez.")
-        while True:    
+        while True:
             tournament_data['description'] = input("Description du tournoi: ")
             if tournament_data['description']:
                 break
@@ -122,7 +122,7 @@ class TournamentView:
     def display_no_available_tournaments():
         """Affiche un message indiquant qu'aucun tournoi n'est disponible."""
         print("Aucun tournoi n'est disponible.\n")
-        
+
     @staticmethod
     def display_invalid_option_message():
         """

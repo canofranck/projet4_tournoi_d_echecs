@@ -2,11 +2,11 @@ class MatchController:
 
     def play_match(round):
         """Simule le déroulement des matches pour un round."""
-        
+
         for match in round.matches:
             # Logique pour simuler le déroulement du match
             # demande les scores aux utilisateurs
-            
+
             print(f"Entrez le score pour "
                   f"{match.player1.first_name} {match.player1.last_name} vs "
                   f"{match.player2.first_name} {match.player2.last_name}")

@@ -149,7 +149,7 @@ class roundController:
         # print("\nDebug: Loaded tournament data:", selected_tournament.to_dict())
         number_of_rounds = selected_tournament.number_of_tours
         # Reprendre l'entrée des résultats pour chaque round
-       
+
         round_number = [int(re.search(r'Round (\d+)', tour['round_name']).group(1))
                         for tour in selected_tournament.list_of_tours]
         if round_number:

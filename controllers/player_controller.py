@@ -1,4 +1,5 @@
 from models.player_model import Player
+from views.main_view import MainView
 from views.player_view import PlayerView
 import constantes
 
@@ -9,8 +10,9 @@ class PlayerController:
         """Initialise le contrôleur des joueurs."""
         self.players = []
         self.player_view = PlayerView()
+        self.main_view = MainView()
 
-    def run_player_menu(self, main_view):
+    def run_player_menu(self):
         """Exécute le menu des joueurs.
         Cette méthode permet de gérer les actions du menu des joueurs,
         notamment l'ajout de nouveaux joueurs, l'affichage de la liste des
@@ -22,6 +24,7 @@ class PlayerController:
         Raises:
             Aucune exception n'est levée.
         """
+        self.main_view.clear_screen()
         while True:
             choice = self.player_view.display_player_menu()
 
@@ -45,6 +48,7 @@ class PlayerController:
         Raises:
             Aucune exception n'est levée.
         """
+        self.main_view.clear_screen()
         print("Ajout d'un nouveau joueur...") 
         player_data = self.player_view.get_player_data()
         last_name = player_data['last_name']
@@ -60,13 +64,13 @@ class PlayerController:
                         player_id_national,
                         score_tournament)
         # Vérifiez s'il y a des doublons en fonction de l'identifiant du joueur
-     
+
         if Player.is_player_id_taken(player_id):
             print("Le joueur existe déjà dans la base de données.")
         else:
             player.save()
             print("Joueur ajouté avec succès dans la sauvegarde!")
-             
+
     def display_players(self):
         """Affiche la liste des joueurs.
         Cette méthode affiche la liste de tous les joueurs par ordre
@@ -79,5 +83,6 @@ class PlayerController:
         Raises:
             Aucune exception n'est levée.
         """
+        self.main_view.clear_screen()
         players = Player.load_players()
         self.player_view.afficher_list(players)

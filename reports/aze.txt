@@ -1,0 +1,142 @@
+Details pour le tournoi : ttttttttt
+Lieu du tournoi : tttttttttttt
+Date du tournoi : 01/01/2000
+Nombre de rounds : 10
+Description du tournoi : tttttttttt
+Etat du tournoi : FINISH
+Liste des joueurs du tournoi :
+Nom : franck
+Prenom : cano
+Date de naissance : 23/05/1971
+ID national des echecs : fc51971
+Nom : pascale
+Prenom : cano
+Date de naissance : 25/05/1967
+ID national des echecs : pc51967
+Nom : emma
+Prenom : cano
+Date de naissance : 26/06/2001
+ID national des echecs : ec62001
+Nom : nathan
+Prenom : cano
+Date de naissance : 27/03/2007
+ID national des echecs : nc32007
+Nom : magali
+Prenom : courte
+Date de naissance : 26/10/1993
+ID national des echecs : mc11993
+Nom : philippe
+Prenom : da costa
+Date de naissance : 01/07/1971
+ID national des echecs : cp71971
+Liste des rounds du tournoi :
+Round : Round 1
+Heure de debut : 25-12-2023 11:25:08
+Heure de fin : 25-12-2023 11:25:13
+Liste des matchs du tournoi :
+Match : franck cano vs magali courte
+Score : 1 - 0
+Match : nathan cano vs pascale cano
+Score : 1 - 0
+Match : emma cano vs philippe da costa
+Score : 1 - 0
+Fin du round
+Round : Round 2
+Heure de debut : 25-12-2023 18:04:54
+Heure de fin : 25-12-2023 18:05:35
+Liste des matchs du tournoi :
+Match : emma cano vs franck cano
+Score : 0 - 1
+Match : nathan cano vs magali courte
+Score : 0 - 1
+Match : pascale cano vs philippe da costa
+Score : 0 - 1
+Fin du round
+Round : Round 3
+Heure de debut : 25-12-2023 18:19:33
+Heure de fin : 25-12-2023 18:19:55
+Liste des matchs du tournoi :
+Match : franck cano vs nathan cano
+Score : 1 - 0
+Match : emma cano vs magali courte
+Score : 1 - 0
+Match : philippe da costa vs pascale cano
+Score : 1 - 0
+Fin du round
+Round : Round 4
+Heure de debut : 25-12-2023 18:20:12
+Heure de fin : 25-12-2023 18:20:18
+Liste des matchs du tournoi :
+Match : franck cano vs emma cano
+Score : 1 - 0
+Match : philippe da costa vs nathan cano
+Score : 1 - 0
+Match : magali courte vs pascale cano
+Score : 1 - 0
+Fin du round
+Round : Round 5
+Heure de debut : 25-12-2023 18:20:19
+Heure de fin : 25-12-2023 18:20:23
+Liste des matchs du tournoi :
+Match : franck cano vs philippe da costa
+Score : 1 - 0
+Match : emma cano vs magali courte
+Score : 1 - 0
+Match : nathan cano vs pascale cano
+Score : 1 - 0
+Fin du round
+Round : Round 6
+Heure de debut : 25-12-2023 18:20:24
+Heure de fin : 25-12-2023 18:20:27
+Liste des matchs du tournoi :
+Match : franck cano vs emma cano
+Score : 1 - 0
+Match : philippe da costa vs nathan cano
+Score : 1 - 0
+Match : magali courte vs pascale cano
+Score : 1 - 0
+Fin du round
+Round : Round 7
+Heure de debut : 25-12-2023 18:20:31
+Heure de fin : 25-12-2023 18:20:39
+Liste des matchs du tournoi :
+Match : franck cano vs philippe da costa
+Score : 1 - 0
+Match : emma cano vs magali courte
+Score : 1 - 0
+Match : nathan cano vs pascale cano
+Score : 1 - 0
+Fin du round
+Round : Round 8
+Heure de debut : 25-12-2023 18:20:39
+Heure de fin : 25-12-2023 18:20:45
+Liste des matchs du tournoi :
+Match : franck cano vs emma cano
+Score : 1 - 0
+Match : philippe da costa vs nathan cano
+Score : 1 - 0
+Match : magali courte vs pascale cano
+Score : 1 - 0
+Fin du round
+Round : Round 9
+Heure de debut : 25-12-2023 18:20:47
+Heure de fin : 25-12-2023 18:20:51
+Liste des matchs du tournoi :
+Match : franck cano vs philippe da costa
+Score : 1 - 0
+Match : emma cano vs magali courte
+Score : 1 - 0
+Match : nathan cano vs pascale cano
+Score : 1 - 0
+Fin du round
+Round : Round 10
+Heure de debut : 25-12-2023 18:21:15
+Heure de fin : 25-12-2023 18:21:27
+Liste des matchs du tournoi :
+Match : franck cano vs emma cano
+Score : 0 - 1
+Match : philippe da costa vs nathan cano
+Score : 0 - 1
+Match : magali courte vs pascale cano
+Score : 0 - 1
+Fin du round

@@ -1,6 +1,4 @@
-import os
 
-# Main Menu
 MAIN_MENU_JOUEUR = "1"
 MAIN_MENU_TOUNOI = "2"
 MAIN_MENU_REPORTS = "3"

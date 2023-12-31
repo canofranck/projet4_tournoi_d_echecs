@@ -1,9 +1,9 @@
 import os
 import re
-import io
 from constantes import IN_PROGRESS, TO_LAUNCH
 from models.player_model import Player
 from models.round_model import Round
+from views.main_view import MainView
 from views.report_view import ReportView
 from models.tournament_model import Tournament
 from views.tournament_view import TournamentView
@@ -17,9 +17,11 @@ class ReportController:
         self.player_controller = player_controller
         self.tournament_controller = tournament_controller
         self.report_view = ReportView()
+        self.main_view = MainView()
 
     def run_report_menu(self):
         """Exécute le menu de rapport en fonction du choix de l'utilisateur."""
+        self.main_view.clear_screen()
         while True:
             choice = self.report_view.display_report_menu()
 
@@ -41,6 +43,7 @@ class ReportController:
     def display_players_alphabetically(self):
         """Affiche les joueurs par ordre alphabétique et permet de sauvegarder
         le rapport."""
+        self.main_view.clear_screen()
         players_report = self.player_controller.display_players()
         players = Player.load_players()
         if not players:
@@ -68,6 +71,7 @@ class ReportController:
 
     def display_all_tournaments(self):
         """Affiche tous les tournois."""
+        self.main_view.clear_screen()
         tournaments = Tournament.load_tournaments()
 
         if not tournaments:
@@ -98,7 +102,7 @@ class ReportController:
 
     def display_tournament_details(self):
         """Affiche les détails d'un tournoi."""
-
+        self.main_view.clear_screen()
         tournaments = Tournament.load_tournaments()
         ongoing_tournaments = [t for t in tournaments]
 
@@ -136,7 +140,7 @@ class ReportController:
                         for tour in selected_tournament.list_of_tours]
         if round_number:
             dernier_numero_round = max(round_number)
-            print("le dernier round est le : ", dernier_numero_round)  
+            print("le dernier round est le : ", dernier_numero_round)
         # Obtenir la liste des joueurs inscrits au tournoi
         players_ids = selected_tournament.players_ids
         players = Player.load_players_by_ids(players_ids)
@@ -152,8 +156,8 @@ class ReportController:
             tour = Round.from_dict(tour_data, players)
             if tour.round_name:
                 tournament_details += (f"Round : {tour.round_name}\n"
-                    f"Heure de debut : {tour.start_time.strftime('%d-%m-%Y %H:%M:%S') if tour.start_time else 'N/A'}\n"
-                    f"Heure de fin : {tour.end_time.strftime('%d-%m-%Y %H:%M:%S') if tour.end_time else 'N/A'}\n")
+                                       f"Heure de debut : {tour.start_time.strftime('%d-%m-%Y %H:%M:%S')}\n"
+                                       f"Heure de fin : {tour.end_time.strftime('%d-%m-%Y %H:%M:%S')}\n")
                 tournament_details += ("Liste des matchs du tournoi :\n")
                 for match in tour.matches:
                     tournament_details += (
@@ -161,6 +165,7 @@ class ReportController:
                         f"{match.player2.last_name}\n"
                         f"Score : {match.score1} - {match.score2}\n"
                     )
+                tournament_details += ("Fin du round\n")
             else:
                 print("Erreur : round_name n'est pas présent dans l'objet Round.")
         print(tournament_details)
@@ -174,7 +179,7 @@ class ReportController:
 
     def save_report_tournament_details_with_html_template(self, report_text, file_name):
         template_path = "templates/template_details_tournament.html"
-        
+
         with open(template_path, 'r', encoding='utf-8') as template_file:
             template_content = template_file.read()
 
@@ -214,16 +219,9 @@ class ReportController:
                     data_row = data_row.replace(",", "") + "</td></tr>"
                     data_rows += f"{data_row}"
             players_rows = ""
-            # Remplacez les balises dans le modèle HTML par les données réelles
-            # modif_template = (
-            #     template_content
-            #     .replace('<!-- INSERT_DATA -->', data_rows)
-            #     # Ajoutez d'autres remplacements au besoin
-            # )
-            # Diviser le texte en lignes
+
             report_lines = report_text.split('\n')
 
-            # ...
             collecting_players = False
             # Lire le texte ligne par ligne
             for index, line in enumerate(report_lines):
@@ -247,6 +245,7 @@ class ReportController:
                         f"</tr>"
                     )
                     players_rows += player_row
+            
             rounds_rows = ""
             collecting_rounds = False
             # Lire le texte ligne par ligne
@@ -259,62 +258,64 @@ class ReportController:
                     round_name = line.replace("Round : ", "").strip()
                     start_time = report_lines[index + 1].replace("Heure de debut : ", "").strip()
                     end_time = report_lines[index + 2].replace("Heure de fin : ", "").strip()
-                    
 
-                    # Ajouter les informations directement à la balise <!-- INSERT_PLAYERS --> du modèle HTML
+                    # Ajouter les informations directement à la balise <!-- INSERT_ROUNDS --> du modèle HTML
                     round_row = (
+                        f" <table>"
+                        f"<tr>"
+                        f"<th>Round</th>"
+                        f"<th>Heure de debut</th>"
+                        f"<th>Heure de fin</th>"
+                        f"</tr>"
                         f"<tr>"
                         f"<td>{round_name}</td>"
                         f"<td>{start_time}</td>"
                         f"<td>{end_time}</td>"
-                        
-                        f"</tr>"
                     )
-                    rounds_rows += round_row
-                    report_lines = report_text.split('\n')       
+
+                    # Collecter les informations des matchs à l'intérieur du bloc des rounds
                     matchs_rows = ""
                     collecting_matchs = False
                     # Lire le texte ligne par ligne
-                    for index, line in enumerate(report_lines):
-                        if line.startswith("Liste des matchs du tournoi :"):
-                            # Commencer à collecter les informations des rounds
+                    for match_index, match_line in enumerate(report_lines[index:]):
+                        if match_line.startswith("Liste des matchs du tournoi :"):
+                            # Commencer à collecter les informations des matchs
                             collecting_matchs = True
-                        elif collecting_matchs and line.startswith("Match : "):
-                            # Extraire les informations du round
-                            match = line.replace("Match : ", "").strip()
-                            score = report_lines[index + 1].replace("Score : ", "").strip()
-                            
-                            
-
-                            # Ajouter les informations directement à la balise <!-- INSERT_PLAYERS --> du modèle HTML
+                        elif collecting_matchs and match_line.startswith("Match : "):
+                            # Extraire les informations du match
+                            match = match_line.replace("Match : ", "").strip()
+                            score = report_lines[index + match_index + 1].replace("Score : ", "").strip()
+                            # Ajouter les informations directement à la balise <!-- INSERT_MATCHES --> du modèle HTML
                             match_row = (
                                 f"<tr>"
                                 f"<td>{match}</td>"
                                 f"<td>{score}</td>"
-                                
                                 f"</tr>"
                             )
                             matchs_rows += match_row
+                        elif match_line.startswith("Fin du round"):
+                            break
+                    round_row += matchs_rows + "</td></tr></table>"
+                    rounds_rows += round_row
             # Remplacez la balise <!-- INSERT_PLAYERS --> dans le modèle HTML
             modif_template = (
                 template_content
                 .replace('<!-- INSERT_DATA -->', data_rows)
                 .replace('<!-- INSERT_PLAYERS -->', players_rows)
                 .replace('<!-- INSERT_ROUNDS -->', rounds_rows)
-                .replace('<!-- INSERT_MATCHES -->', matchs_rows)
+                # .replace('<!-- INSERT_MATCHES -->', matchs_rows)
             )
-          
-            # ...
             # Enregistrer le contenu modifié dans un nouveau fichier HTML
             self.save_report_as_html(modif_template, file_name)
 
-
     def display_tournament_players_alphabetically(self):
         """Affiche les joueurs d'un tournoi par ordre alphabétique."""
+        self.main_view.clear_screen()
         pass
 
     def display_all_tournament_rounds_and_matches(self):
         """Affiche tous les tours d'un tournoi et tous les matchs du tournoi"""
+        self.main_view.clear_screen()
         pass
 
     def save_report_to_file(self, report_text, file_name):

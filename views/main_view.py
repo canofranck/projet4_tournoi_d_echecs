@@ -1,3 +1,4 @@
+from os import name, system
 import constantes
 
 
@@ -22,3 +23,14 @@ class MainView:
         Affiche un message indiquant qu'une option invalide a été sélectionnée.
         """
         print("Option invalide. Veuillez choisir une option valide.")
+
+    @staticmethod
+    def clear_screen():
+        """Clear the terminal"""
+
+        # for windows
+        if name == 'nt':
+            _ = system('cls')
+        # for mac and linux(here, os.name is 'posix')
+        else:
+            _ = system('clear')

@@ -14,6 +14,7 @@ class MainController:
         self.player_controller = PlayerController()
         self.tournament_controller = TournamentController()
         self.report_controller = ReportController(self.player_controller)
+        self.main_view = MainView()
 
     def run(self):
         """Lance l'application principale.
@@ -28,13 +29,15 @@ class MainController:
         Raises:
             Aucune exception n'est levée.
         """
+
         while True:
+            self.main_view.clear_screen()
             choice = self.main_view.display_main_menu()
 
             if choice == constantes.MAIN_MENU_JOUEUR:
-                self.player_controller.run_player_menu(self.main_view)
+                self.player_controller.run_player_menu()
             elif choice == constantes.MAIN_MENU_TOUNOI:
-                self.tournament_controller.run_tournament_menu(self.main_view)
+                self.tournament_controller.run_tournament_menu()
             elif choice == constantes.MAIN_MENU_REPORTS:
                 self.report_controller.run_report_menu()
             elif choice == constantes.MAIN_MENU_QUIT:
