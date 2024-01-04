@@ -199,31 +199,31 @@ class TournamentController:
         except ValueError:
             TournamentView.display_invalid_choice()
 
-    def resume_tournament(self):
-        """Reprendre un tournoi là où il s'est arrêté."""
-        # Charger les tournois
-        self.load_tournaments()
+    # def resume_tournament(self):
+    #     """Reprendre un tournoi là où il s'est arrêté."""
+    #     # Charger les tournois
+    #     self.load_tournaments()
 
-        # Filtrer les tournois en cours
-        in_progress_tournaments = [t for t in self.tournaments if t.etat_tournoi == IN_PROGRESS]
+    #     # Filtrer les tournois en cours
+    #     in_progress_tournaments = [t for t in self.tournaments if t.etat_tournoi == IN_PROGRESS]
 
-        if not in_progress_tournaments:
-            print("Aucun tournoi en cours.")
-            return
+    #     if not in_progress_tournaments:
+    #         print("Aucun tournoi en cours.")
+    #         return
 
-        # Afficher les tournois en cours
-        self.tournament_view.display_ongoing_tournaments(in_progress_tournaments)
+    #     # Afficher les tournois en cours
+    #     self.tournament_view.display_ongoing_tournaments(in_progress_tournaments)
 
-        try:
-            choice = int(input("Veuillez sélectionner le numéro du tournoi à reprendre : "))
-            if 1 <= choice <= len(in_progress_tournaments):
-                selected_tournament_index = choice - 1
-                selected_tournament = in_progress_tournaments[selected_tournament_index]
-                self.resume_selected_tournament(selected_tournament)
-            else:
-                TournamentView.display_invalid_choice()
-        except ValueError:
-            TournamentView.display_invalid_choice()
+    #     try:
+    #         choice = int(input("Veuillez sélectionner le numéro du tournoi à reprendre : "))
+    #         if 1 <= choice <= len(in_progress_tournaments):
+    #             selected_tournament_index = choice - 1
+    #             selected_tournament = in_progress_tournaments[selected_tournament_index]
+    #             self.resume_selected_tournament(selected_tournament)
+    #         else:
+    #             TournamentView.display_invalid_choice()
+    #     except ValueError:
+    #         TournamentView.display_invalid_choice()
 
     def resume_selected_tournament(self, tournament):
         """Reprendre un tournoi sélectionné."""

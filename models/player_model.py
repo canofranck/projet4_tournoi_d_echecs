@@ -149,12 +149,12 @@ class Player:
             "score_tournament": self.score_tournament
         }
 
-    def to_list(self):
-        """Convertit l'objet Player en une liste.
-        Returns:
-            list: Liste représentant l'objet Player.
-        """
-        return [self.player_id, self.score]
+    # def to_list(self):
+    #     """Convertit l'objet Player en une liste.
+    #     Returns:
+    #         list: Liste représentant l'objet Player.
+    #     """
+    #     return [self.player_id, self.score]
 
     @classmethod
     def get_player_by_id(cls, player_id):

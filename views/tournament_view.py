@@ -57,7 +57,9 @@ class TournamentView:
                 break
             else:
                 print("La description du tournoi ne peut pas être vide. Réessayez.")
-        tournament_data['tournament_id'] = str(uuid.uuid4())
+        gen_id = str(uuid.uuid4())
+        tournament_id = gen_id[:6]
+        tournament_data['tournament_id'] = tournament_id
         # tournament_data['players_ids'] = input("Liste des ID des joueurs séparés par des virgules: ").split(',')
         return tournament_data
 

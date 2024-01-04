@@ -1,4 +1,4 @@
-Liste de tous les joueurs par ordre alphabétique :
+Liste des joueurs par ordre alphabetique du tournoi :
 Nom : cano, Prénom : emma, Date de naissance : 26/06/2001, ID : 8ed007af-1a04-4c49-a12f-8c74e9954302, Score du tournoi : 0
 Nom : cano, Prénom : franck, Date de naissance : 23/05/1971, ID : 2bcb51e7-c495-4a1f-be26-1d32b24d9a53, Score du tournoi : 0
 Nom : cano, Prénom : nathan, Date de naissance : 27/03/2007, ID : 9b1a6881-f13d-4d18-a3eb-1229ef05713a, Score du tournoi : 0

@@ -10,7 +10,7 @@ class ReportView:
         print("1. Liste de tous les joueurs par ordre alphabétique")
         print("2. Liste de tous les tournois")
         print("3. Détails d'un tournoi donné")
-        print("4. Liste des joueurs d'un tournoi par ordre alphabétique")
+        print("4. Liste des joueurs du tournoi par ordre alphabétique")
         print("5. Liste de tous les tours d'un tournoi et de tous les matchs " +
               "du tournoi")
         print("6. Revenir au menu principal")

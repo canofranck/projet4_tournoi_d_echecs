@@ -245,7 +245,7 @@ class ReportController:
                         f"</tr>"
                     )
                     players_rows += player_row
-            
+
             rounds_rows = ""
             collecting_rounds = False
             # Lire le texte ligne par ligne
@@ -311,7 +311,53 @@ class ReportController:
     def display_tournament_players_alphabetically(self):
         """Affiche les joueurs d'un tournoi par ordre alphabétique."""
         self.main_view.clear_screen()
-        pass
+        tournaments = Tournament.load_tournaments()
+        ongoing_tournaments = [t for t in tournaments]
+
+        if not ongoing_tournaments:
+            TournamentView.display_no_ongoing_tournaments()
+            return
+
+        print("Quel tournois vous voulez les details :")
+        for i, tournament in enumerate(ongoing_tournaments, start=1):
+            print(f"{i}. {tournament.tournament_name}")
+
+        try:
+            choice = int(input("Veuillez sélectionner le numéro du tournoi : "))
+            if 1 <= choice <= len(ongoing_tournaments):
+                selected_tournament_index = choice - 1
+                selected_tournament = ongoing_tournaments[selected_tournament_index]
+                self.tournament_players_alphabetically(selected_tournament)
+            else:
+                TournamentView.display_invalid_choice()
+        except ValueError:
+            TournamentView.display_invalid_choice()
+
+    def tournament_players_alphabetically(self, selected_tournament):
+        """affiche tous les joueurs d un tournoi dans l ordre alhabetique"""
+        self.main_view.clear_screen()
+        # Obtenir la liste des joueurs inscrits au tournoi
+        players_ids = selected_tournament.players_ids
+        players = Player.load_players_by_ids(players_ids)
+        # Triez les joueurs par nom de famille, puis par prénom
+        sorted_players = sorted(players, key=lambda x: (x.last_name, x.first_name))
+        tournament_list_players = ""
+        tournament_list_players += ("Liste des joueurs par ordre alphabetique du tournoi :\n")
+        for player in sorted_players:
+            tournament_list_players += (
+                 f"Nom : {player.last_name}, Prénom : {player.first_name}, "
+                 f"Date de naissance : {player.birth_date}, "
+                 f"ID : {player.player_id}, "
+                 f"Score du tournoi : {player.score_tournament}\n"
+                 )
+        print(tournament_list_players)
+        user_choice = self.report_view.prompt_save_report()
+        if user_choice.lower() == "o":
+            file_name = self.report_view.get_file_name_to_save()
+            self.save_report_to_file(tournament_list_players, file_name)
+            self.save_report_with_html_template(tournament_list_players, file_name)
+        else:
+            print("Le rapport n'a pas été sauvegardé.")
 
     def display_all_tournament_rounds_and_matches(self):
         """Affiche tous les tours d'un tournoi et tous les matchs du tournoi"""

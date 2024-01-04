@@ -1,0 +1,9 @@
+Liste de tous les joueurs par ordre alphabétique :
+Nom : csharp, Prénom : philippe, Date de naissance : 01/07/1971, ID : 4aa51c, Score du tournoi : 0
+Nom : java, Prénom : magali, Date de naissance : 26/10/1991, ID : cfd563, Score du tournoi : 0
+Nom : php, Prénom : raphael, Date de naissance : 01/01/1995, ID : 62d7dc, Score du tournoi : 0
+Nom : python, Prénom : emma, Date de naissance : 26/06/2001, ID : bfd2e9, Score du tournoi : 0
+Nom : python, Prénom : franck, Date de naissance : 23/05/1971, ID : 189a5e, Score du tournoi : 0
+Nom : python, Prénom : nathan, Date de naissance : 27/03/2007, ID : 0b0d67, Score du tournoi : 0
+Nom : python, Prénom : pascale, Date de naissance : 25/05/1967, ID : 3ceaf9, Score du tournoi : 0
+Nom : ruby, Prénom : delphine, Date de naissance : 05/09/1999, ID : 102bf0, Score du tournoi : 0

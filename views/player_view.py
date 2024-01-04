@@ -68,7 +68,7 @@ class PlayerView:
         motif_regex = r'^[A-Za-z]{2}\d{5}$'
         while True:
             # Demande à l'utilisateur d'entrer l'identifiant du joueur
-            player_id_national = input("Entrez l'identifiant du joueur : ")
+            player_id_national = input("Entrez l'identifiant nationnal d echecs du joueur (ab12345): ")
 
             # Vérification de la correspondance avec la regex
             if re.match(motif_regex, player_id_national):
@@ -80,7 +80,10 @@ class PlayerView:
 
         # score_tournament=input("Entrez le score du joueur dans le tournoi: ")
         score_tournament = 0
-        player_id = str(uuid.uuid4())
+        gen_id = str(uuid.uuid4())
+        player_id = gen_id[:6]
+        
+        # player_id = str(uuid.uuid4())
 
         return {
             'last_name': last_name,

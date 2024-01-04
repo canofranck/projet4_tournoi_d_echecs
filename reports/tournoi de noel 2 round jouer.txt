@@ -1,0 +1,66 @@
+Details pour le tournoi : tounoi de noel
+Lieu du tournoi : paris
+Date du tournoi : 25/12/2023
+Nombre de rounds : 10
+Description du tournoi : un tounoi de fetes
+Etat du tournoi : IN PROGRESS
+Liste des joueurs du tournoi :
+Nom : franck
+Prenom : python
+Date de naissance : 23/05/1971
+ID national des echecs : fr51971
+Nom : pascale
+Prenom : python
+Date de naissance : 25/05/1967
+ID national des echecs : pa51967
+Nom : nathan
+Prenom : python
+Date de naissance : 27/03/2007
+ID national des echecs : na32007
+Nom : emma
+Prenom : python
+Date de naissance : 26/06/2001
+ID national des echecs : em62001
+Nom : magali
+Prenom : java
+Date de naissance : 26/10/1991
+ID national des echecs : ma11991
+Nom : philippe
+Prenom : csharp
+Date de naissance : 01/07/1971
+ID national des echecs : ph71971
+Nom : raphael
+Prenom : php
+Date de naissance : 01/01/1995
+ID national des echecs : ra11995
+Nom : delphine
+Prenom : ruby
+Date de naissance : 05/09/1999
+ID national des echecs : de91999
+Liste des rounds du tournoi :
+Round : Round 1
+Heure de debut : 02-01-2024 18:16:46
+Heure de fin : 02-01-2024 18:17:14
+Liste des matchs du tournoi :
+Match : magali java vs nathan python
+Score : 1 - 0
+Match : pascale python vs franck python
+Score : 0.5 - 0.5
+Match : delphine ruby vs emma python
+Score : 0 - 1
+Match : philippe csharp vs raphael php
+Score : 1 - 0
+Fin du round
+Round : Round 2
+Heure de debut : 02-01-2024 18:18:36
+Heure de fin : 02-01-2024 18:18:47
+Liste des matchs du tournoi :
+Match : philippe csharp vs magali java
+Score : 1 - 0
+Match : emma python vs franck python
+Score : 0.5 - 0.5
+Match : pascale python vs raphael php
+Score : 0 - 1
+Match : nathan python vs delphine ruby
+Score : 1 - 0
+Fin du round

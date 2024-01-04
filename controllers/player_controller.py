@@ -49,7 +49,7 @@ class PlayerController:
             Aucune exception n'est levée.
         """
         self.main_view.clear_screen()
-        print("Ajout d'un nouveau joueur...") 
+        print("Ajout d'un nouveau joueur...")
         player_data = self.player_view.get_player_data()
         last_name = player_data['last_name']
         first_name = player_data['first_name']
