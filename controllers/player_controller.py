@@ -6,6 +6,7 @@ import constantes
 
 class PlayerController:
     """Contrôleur pour la gestion des joueurs."""
+
     def __init__(self):
         """Initialise le contrôleur des joueurs."""
         self.players = []
@@ -51,18 +52,20 @@ class PlayerController:
         self.main_view.clear_screen()
         print("Ajout d'un nouveau joueur...")
         player_data = self.player_view.get_player_data()
-        last_name = player_data['last_name']
-        first_name = player_data['first_name']
-        birth_date = player_data['birth_date']
-        player_id = player_data['player_id']
-        player_id_national = player_data['player_id_national']
-        score_tournament = player_data['score_tournament']
-        player = Player(last_name,
-                        first_name,
-                        birth_date,
-                        player_id,
-                        player_id_national,
-                        score_tournament)
+        last_name = player_data["last_name"]
+        first_name = player_data["first_name"]
+        birth_date = player_data["birth_date"]
+        player_id = player_data["player_id"]
+        player_id_national = player_data["player_id_national"]
+        score_tournament = player_data["score_tournament"]
+        player = Player(
+            last_name,
+            first_name,
+            birth_date,
+            player_id,
+            player_id_national,
+            score_tournament,
+        )
         # Vérifiez s'il y a des doublons en fonction de l'identifiant du joueur
 
         if Player.is_player_id_taken(player_id):

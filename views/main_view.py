@@ -27,10 +27,11 @@ class MainView:
     @staticmethod
     def clear_screen():
         """Clear the terminal"""
-
         # for windows
-        if name == 'nt':
-            _ = system('cls')
+
+        if name == "nt":
+            _ = system("cls")
         # for mac and linux(here, os.name is 'posix')
+
         else:
-            _ = system('clear')
+            _ = system("clear")

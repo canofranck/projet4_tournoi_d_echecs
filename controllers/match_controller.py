@@ -1,5 +1,4 @@
 class MatchController:
-
     def play_match(round):
         """Simule le déroulement des matches pour un round."""
 
@@ -7,15 +6,27 @@ class MatchController:
             # Logique pour simuler le déroulement du match
             # demande les scores aux utilisateurs
 
-            print(f"Entrez le score pour "
-                  f"{match.player1.first_name} {match.player1.last_name} vs "
-                  f"{match.player2.first_name} {match.player2.last_name}")
+            print(
+                f"Entrez le score pour "
+                f"{match.player1.first_name} {match.player1.last_name} vs "
+                f"{match.player2.first_name} {match.player2.last_name}\n"
+            )
 
             # Saisie des scores par les utilisateurs
-            score1 = int(input(f"Score de {match.player1.first_name} {match.player1.last_name}: "))
-            score2 = int(input(f"Score de {match.player2.first_name} {match.player2.last_name}: "))
 
+            score1 = int(
+                input(
+                    f"Score de {match.player1.first_name} {match.player1.last_name}: "
+                )
+            )
+            score2 = int(
+                input(
+                    f"Score de {match.player2.first_name} {match.player2.last_name}: "
+                )
+            )
+            print()
             # Mettre à jour les scores des joueurs
+
             match.score1 = score1
             match.score2 = score2
             if score1 > score2:

@@ -63,13 +63,14 @@ class TournamentController:
         self.main_view.clear_screen()
         print("Création d'un nouveau tournoi...")
         tournament_data = self.tournament_view.get_tournament_data()
-        tournament_name = tournament_data['tournament_name']
-        location = tournament_data['location']
-        tournament_date = tournament_data['tournament_date']
-        number_of_tours = tournament_data['number_of_tours']
-        description = tournament_data['description']
-        tournament_id = tournament_data['tournament_id']
+        tournament_name = tournament_data["tournament_name"]
+        location = tournament_data["location"]
+        tournament_date = tournament_data["tournament_date"]
+        number_of_tours = tournament_data["number_of_tours"]
+        description = tournament_data["description"]
+        tournament_id = tournament_data["tournament_id"]
         # Utilise la méthode select_players_for_tournament pour permettre à l'utilisateur de sélectionner les joueurs
+
         players_ids = self.select_players_for_tournament()
 
         new_tournament = Tournament(
@@ -79,7 +80,7 @@ class TournamentController:
             number_of_tours=number_of_tours,
             description=description,
             players_ids=players_ids,
-            tournament_id=tournament_id
+            tournament_id=tournament_id,
         )
         self.tournaments.append(new_tournament)
         new_tournament.save_instance()
@@ -99,7 +100,6 @@ class TournamentController:
             Aucune exception n'est levée.
         """
         self.main_view.clear_screen()
-
         tournaments = Tournament.load_tournaments()
         self.tournament_view.afficher_list(tournaments)
 
@@ -114,13 +114,14 @@ class TournamentController:
             # print(f"{i}. {player.first_name} {player.last_name} ({player.player_id})")
         while True:
             try:
-                selection = input("Entrez les numéros des joueurs sélectionnés, séparés par des virgules: ")
-                selected_indices = [int(index) - 1 for index in selection.split(',')]
+                selection = input(
+                    "Entrez les numéros des joueurs sélectionnés, séparés par des virgules: "
+                )
+                selected_indices = [int(index) - 1 for index in selection.split(",")]
                 selected_players = [players[index] for index in selected_indices]
                 break
             except (ValueError, IndexError):
                 print("Saisie invalide. Veuillez réessayer.")
-
         return [player.player_id for player in selected_players]
 
     def launch_tournament_menu(self):
@@ -128,23 +129,23 @@ class TournamentController:
         self.main_view.clear_screen()
         self.load_tournaments()
         # Filtrer les tournois non terminés
-        ongoing_tournaments = [t for t in self.tournaments if t.etat_tournoi == TO_LAUNCH]
+
+        ongoing_tournaments = [
+            t for t in self.tournaments if t.etat_tournoi == TO_LAUNCH
+        ]
 
         if not ongoing_tournaments:
             TournamentView.display_no_available_tournaments()
             return
-        print("Tournois en cours dans lauch tournament :")
-        for i, tournament in enumerate(ongoing_tournaments, start=1):
-            print(f"{i}. {tournament.tournament_name}")
         TournamentView.display_ongoing_tournaments(ongoing_tournaments)
 
         try:
-            choice = int(input("Veuillez sélectionner le numéro du tournoi à lancer : "))
+            choice = int(
+                input("Veuillez sélectionner le numéro du tournoi à lancer : ")
+            )
             if 1 <= choice <= len(ongoing_tournaments):
                 selected_tournament_index = choice - 1
-                # print(f"Avant la boucle : {ongoing_tournaments[selected_tournament_index].tournament_name}")
                 selected_tournament = ongoing_tournaments[selected_tournament_index]
-                # print(f"Avant le lancement : {selected_tournament.tournament_name}")
                 self.start_selected_tournament(selected_tournament)
             else:
                 TournamentView.display_invalid_choice()
@@ -156,21 +157,28 @@ class TournamentController:
         # print(f"Au début de la méthode start_selected_tournament : {tournament.tournament_name}")
 
         # Modifie l'état du tournoi
+
         if tournament.etat_tournoi == TO_LAUNCH:
             tournament.start_tournament(tournament.tournament_id)
 
             # Obtenir la liste des joueurs inscrits au tournoi
+
             players_ids = tournament.players_ids
 
             # Appel au contrôleur de round pour débuter l'entrée des résultats
+
             round_controller = roundController()
-            round_controller.start_rounds(tournament, tournament.tournament_id, players_ids)
+            round_controller.start_rounds(
+                tournament, tournament.tournament_id, players_ids
+            )
 
             print("Le tournoi a été lancé avec succès.")
         elif tournament.etat_tournoi == IN_PROGRESS:
             print("Le tournoi est déjà en cours.")
         else:
-            print("Le tournoi ne peut pas être lancé dans son état actuel. dans start selected tournament")
+            print(
+                "Le tournoi ne peut pas être lancé dans son état actuel. dans start selected tournament"
+            )
 
     def resume_tournament_menu(self):
         """Affiche les tournois en cours et permet à l'utilisateur de choisir
@@ -178,18 +186,20 @@ class TournamentController:
         """
         self.main_view.clear_screen()
         self.load_tournaments()
-        ongoing_tournaments = [t for t in self.tournaments if t.etat_tournoi == IN_PROGRESS]
+        ongoing_tournaments = [
+            t for t in self.tournaments if t.etat_tournoi == IN_PROGRESS
+        ]
 
         if not ongoing_tournaments:
-            TournamentView.display_no_ongoing_tournaments()
+            TournamentView.display_ongoing_tournaments(ongoing_tournaments)
             return
-
         print("Tournois en cours (IN PROGRESS) :")
         for i, tournament in enumerate(ongoing_tournaments, start=1):
             print(f"{i}. {tournament.tournament_name}")
-
         try:
-            choice = int(input("Veuillez sélectionner le numéro du tournoi à reprendre : "))
+            choice = int(
+                input("Veuillez sélectionner le numéro du tournoi à reprendre : ")
+            )
             if 1 <= choice <= len(ongoing_tournaments):
                 selected_tournament_index = choice - 1
                 selected_tournament = ongoing_tournaments[selected_tournament_index]
@@ -199,41 +209,15 @@ class TournamentController:
         except ValueError:
             TournamentView.display_invalid_choice()
 
-    # def resume_tournament(self):
-    #     """Reprendre un tournoi là où il s'est arrêté."""
-    #     # Charger les tournois
-    #     self.load_tournaments()
-
-    #     # Filtrer les tournois en cours
-    #     in_progress_tournaments = [t for t in self.tournaments if t.etat_tournoi == IN_PROGRESS]
-
-    #     if not in_progress_tournaments:
-    #         print("Aucun tournoi en cours.")
-    #         return
-
-    #     # Afficher les tournois en cours
-    #     self.tournament_view.display_ongoing_tournaments(in_progress_tournaments)
-
-    #     try:
-    #         choice = int(input("Veuillez sélectionner le numéro du tournoi à reprendre : "))
-    #         if 1 <= choice <= len(in_progress_tournaments):
-    #             selected_tournament_index = choice - 1
-    #             selected_tournament = in_progress_tournaments[selected_tournament_index]
-    #             self.resume_selected_tournament(selected_tournament)
-    #         else:
-    #             TournamentView.display_invalid_choice()
-    #     except ValueError:
-    #         TournamentView.display_invalid_choice()
-
     def resume_selected_tournament(self, tournament):
         """Reprendre un tournoi sélectionné."""
         # Obtenir la liste des joueurs inscrits au tournoi
+
         players_ids = tournament.players_ids
         # Appel au contrôleur de round pour reprendre l'entrée des résultats
-        round_controller = roundController()
-        round_controller.resume_rounds(tournament, tournament.tournament_id, players_ids)
 
-        print("Le tournoi a été repris avec succès.")
+        round_controller = roundController()
+        round_controller.resume_rounds(tournament.tournament_id, players_ids)
 
     def load_tournaments_with_rounds(self):
         """Charge les tournois avec les informations sur les rounds depuis le fichier

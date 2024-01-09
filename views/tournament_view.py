@@ -1,6 +1,7 @@
 from datetime import datetime
 import uuid
-from constantes import TO_LAUNCH, IN_PROGRESS
+# from constantes import TO_LAUNCH, IN_PROGRESS
+import constantes
 
 
 class TournamentView:
@@ -9,11 +10,11 @@ class TournamentView:
     def display_tournament_menu(self):
         """Affiche le menu des tournois et récupère le choix de l'utilisateur."""
         print("Menu des tournois:")
-        print("1. Nouveau tournoi")
-        print("2. Afficher les tournois")
-        print("3. Lancer un tournoi")
-        print("4. Reprendre un tournoi en cours")
-        print("5. pour. Quitter")
+        print(constantes.TOURNAMENT_MENU_NOUVEAU, "Nouveau tournoi")
+        print(constantes.TOURNAMENT_MENU_AFFICHER, "Afficher les tournois")
+        print(constantes.TOURNAMENT_MENU_LANCER, "Lancer un tournoi")
+        print(constantes.TOURNAMENT_MENU_REPRENDRE, "Reprendre un tournoi en cours")
+        print(constantes.TOURNAMENT_MENU_QUIT, "Retour au menu principal")
         choice = input("Veuillez choisir une option: ")
         return choice
 
@@ -21,46 +22,53 @@ class TournamentView:
         """Récupère les données d'un nouveau tournoi auprès de l'utilisateur."""
         tournament_data = {}
         while True:
-            tournament_data['tournament_name'] = input("Nom du tournoi: ")
-            if tournament_data['tournament_name']:
+            tournament_data["tournament_name"] = input("Nom du tournoi: ")
+            if tournament_data["tournament_name"]:
                 break
             else:
                 print("Le nom du tournoi ne peut pas être vide. Réessayez.")
         while True:
-            tournament_data['location'] = input("Lieu du tournoi: ")
-            if tournament_data['location']:
+            tournament_data["location"] = input("Lieu du tournoi: ")
+            if tournament_data["location"]:
                 break
             else:
                 print("Le lieu du tournoi ne peut pas être vide. Réessayez.")
         while True:
-            tournament_data['tournament_date'] = input("Date du tournoi: (au format JJ/MM/AAAA) : ")
+            tournament_data["tournament_date"] = input(
+                "Date du tournoi: (au format JJ/MM/AAAA) : "
+            )
             try:
                 # Essayer de convertir la chaîne en objet datetime
-                datetime.strptime(tournament_data['tournament_date'], "%d/%m/%Y")
 
+                datetime.strptime(tournament_data["tournament_date"], "%d/%m/%Y")
                 # La conversion a réussi, la date est valide
+
                 print("La date est conforme.")
                 break  # Sortir de la boucle si la date est conforme
             except ValueError:
                 # La conversion a échoué, la date n'est pas valide
-                print("Format de date invalide. Assurez-vous d'utiliser " +
-                      "le format JJ/MM/AAAA. Réessayez.")
+
+                print(
+                    "Format de date invalide. Assurez-vous d'utiliser "
+                    + "le format JJ/MM/AAAA. Réessayez."
+                )
         while True:
             try:
-                tournament_data['number_of_tours'] = int(input("Nombre de tours: "))
+                tournament_data["number_of_tours"] = int(input("Nombre de tours: "))
                 break
             except ValueError:
                 print("Le nombre de tours du  tournoi doit etre un entier. Réessayez.")
         while True:
-            tournament_data['description'] = input("Description du tournoi: ")
-            if tournament_data['description']:
+            tournament_data["description"] = input("Description du tournoi: ")
+            if tournament_data["description"]:
                 break
             else:
                 print("La description du tournoi ne peut pas être vide. Réessayez.")
         gen_id = str(uuid.uuid4())
         tournament_id = gen_id[:6]
-        tournament_data['tournament_id'] = tournament_id
+        tournament_data["tournament_id"] = tournament_id
         # tournament_data['players_ids'] = input("Liste des ID des joueurs séparés par des virgules: ").split(',')
+
         return tournament_data
 
     def afficher_list(self, tournaments):
@@ -89,20 +97,19 @@ class TournamentView:
         print(f"Le tournoi '{tournament_name}' a été lancé avec succès.\n")
 
     @staticmethod
-    def display_tournament(tournament,  index=None):
+    def display_tournament(tournament, index=None):
         """Affiche les détails du tournoi."""
-        if tournament.etat_tournoi == TO_LAUNCH:
+        if tournament.etat_tournoi == constantes.TO_LAUNCH:
             etat = "TO_LAUNCH"
-        elif tournament.etat_tournoi == IN_PROGRESS:
+        elif tournament.etat_tournoi == constantes.IN_PROGRESS:
             etat = "IN_PROGRESS"
         else:
             etat = "FINISH"
-
         if index is not None:
             details = (
                 f"{index + 1}. {tournament.tournament_name} ({etat})"
                 f" - {tournament.location} - {tournament.tournament_date}\n"
-             )
+            )
         else:
             details = (
                 f"{tournament.tournament_id}. {tournament.tournament_name} ({etat})"
@@ -118,7 +125,9 @@ class TournamentView:
     @staticmethod
     def display_tournament_cannot_start():
         """Affiche un message indiquant qu'un tournoi ne peut pas être lancé."""
-        print("Le tournoi ne peut pas être lancé. Vérifiez s'il est déjà terminé ou en cours.\n")
+        print(
+            "Le tournoi ne peut pas être lancé. Vérifiez s'il est déjà terminé ou en cours.\n"
+        )
 
     @staticmethod
     def display_no_available_tournaments():

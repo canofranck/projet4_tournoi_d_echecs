@@ -5,15 +5,15 @@ from constantes import FILE_NAME
 
 
 class Player:
-
-    def __init__(self,
-                 last_name,
-                 first_name,
-                 birth_date,
-                 player_id,
-                 player_id_national,
-                 score_tournament
-                 ):
+    def __init__(
+        self,
+        last_name,
+        first_name,
+        birth_date,
+        player_id,
+        player_id_national,
+        score_tournament,
+    ):
         """
         Initialise un objet Player avec les attributs spécifiés.
 
@@ -51,17 +51,16 @@ class Player:
         file_path = os.path.join(DATA_FOLDER, FILE_NAME)
         if not os.path.exists(file_path) or os.path.getsize(file_path) == 0:
             return players  # Si le fichier n'existe pas ou est vide, retourne une liste vide
-
-        with open(file_path, 'r') as file:
+        with open(file_path, "r") as file:
             players_data = json.load(file)
             for data in players_data:
                 player = Player(
-                    data['last_name'],
-                    data['first_name'],
-                    data['birth_date'],
-                    data['player_id'],
-                    data['player_id_national'],
-                    data['score_tournament']
+                    data["last_name"],
+                    data["first_name"],
+                    data["birth_date"],
+                    data["player_id"],
+                    data["player_id_national"],
+                    data["score_tournament"],
                 )
                 players.append(player)
         return players
@@ -83,15 +82,17 @@ class Player:
         players.append(self)
         players_data = []
         for p in players:
-            players_data.append({
+            players_data.append(
+                {
                     "last_name": p.last_name,
                     "first_name": p.first_name,
                     "birth_date": p.birth_date,
                     "player_id": p.player_id,
                     "player_id_national": p.player_id_national,
-                    "score_tournament": p.score_tournament
-                })
-        with open(file_path, 'w') as file:
+                    "score_tournament": p.score_tournament,
+                }
+            )
+        with open(file_path, "w") as file:
             json.dump(players_data, file, indent=4)
 
     @staticmethod
@@ -132,7 +133,9 @@ class Player:
             list: Liste des joueurs correspondant aux IDs spécifiés.
         """
         all_players = cls.load_players()  # Chargez tous les joueurs
-        selected_players = [player for player in all_players if player.player_id in players_ids]
+        selected_players = [
+            player for player in all_players if player.player_id in players_ids
+        ]
         return selected_players
 
     def to_dict(self):
@@ -146,7 +149,7 @@ class Player:
             "birth_date": self.birth_date,
             "player_id": self.player_id,
             "player_id_national": self.player_id_national,
-            "score_tournament": self.score_tournament
+            "score_tournament": self.score_tournament,
         }
 
     # def to_list(self):
@@ -169,3 +172,31 @@ class Player:
             if player.player_id == player_id:
                 return player
         return None  # Retourne None si le joueur n'est pas trouvé
+
+    def update_score_tournament(self, player_id, new_score):
+        """Met à jour le score du tournoi pour un joueur spécifié.
+        Args:
+            player_id (str): L'ID du joueur.
+            new_score (int): Le nouveau score du tournoi.
+        Returns:
+            Aucune valeur de retour.
+        """
+        players = self.load_players()
+        for player in players:
+            if player.player_id == player_id:
+                player.score_tournament += new_score
+        # Enregistrez tous les joueurs dans le fichier JSON
+
+        with open(os.path.join(DATA_FOLDER, FILE_NAME), "w") as file:
+            players_data = [
+                {
+                    "last_name": p.last_name,
+                    "first_name": p.first_name,
+                    "birth_date": p.birth_date,
+                    "player_id": p.player_id,
+                    "player_id_national": p.player_id_national,
+                    "score_tournament": p.score_tournament,
+                }
+                for p in players
+            ]
+            json.dump(players_data, file, indent=4)

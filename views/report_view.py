@@ -1,3 +1,6 @@
+import constantes
+
+
 class ReportView:
     @staticmethod
     def display_report_menu():
@@ -7,13 +10,15 @@ class ReportView:
             str: Le choix de l'utilisateur.
         """
         print("\nMenu de Rapports :")
-        print("1. Liste de tous les joueurs par ordre alphabétique")
-        print("2. Liste de tous les tournois")
-        print("3. Détails d'un tournoi donné")
-        print("4. Liste des joueurs du tournoi par ordre alphabétique")
-        print("5. Liste de tous les tours d'un tournoi et de tous les matchs " +
-              "du tournoi")
-        print("6. Revenir au menu principal")
+        print(constantes.REPORT_MENU_LISTE_JOUEUR_ALPHA, "Liste de tous les joueurs par ordre alphabétique")
+        print(constantes.REPORT_MENU_LISTE_TOURNOI, "Liste de tous les tournois")
+        print(constantes.REPORT_MENU_LISTE_DATE_TOURNOI, "Nom et date d'un tournoi donné")
+        print(constantes.REPORT_MENU_LISTE_JOUEUR_TOURNOI, "Liste des joueurs du tournoi par ordre alphabétique")
+        print(
+            constantes.REPORT_MENU_LISTE_ROUND_MATCH_TOURNOI, "Liste de tous les tours d'un tournoi et de tous les"
+            + " matchs du tournoi"
+        )
+        print(constantes.REPORT_MENU_QUIT, "Revenir au menu principal")
         return input("Choisissez une option : ")
 
     @staticmethod
@@ -22,8 +27,9 @@ class ReportView:
         Affiche un message indiquant qu'une option invalide a été sélectionnée
         pour les rapports.
         """
-        print("Option invalide. Veuillez choisir une option valide pour" +
-              "les rapports.")
+        print(
+            "Option invalide. Veuillez choisir une option valide pour" + "les rapports."
+        )
 
     @staticmethod
     def prompt_save_report():
