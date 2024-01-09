@@ -128,12 +128,12 @@ class roundController:
         player_points[player_id] += score
         # Mettez à jour le score du tournoi dans le modèle Player
 
-        player = Player.get_player_by_id(player_id)
-        if player:
-            new_tournament_score = player_points[player_id]
-            # player.update_score_tournament(player_id, new_tournament_score)
-        else:
-            print(f"Joueur avec l'ID {player_id} non trouvé.")
+        # player = Player.get_player_by_id(player_id)
+        # if player:
+        # new_tournament_score = player_points[player_id]
+        # player.update_score_tournament(player_id, new_tournament_score)
+        # else:
+        # print(f"Joueur avec l'ID {player_id} non trouvé.")
 
     def resume_rounds(self, tournament_id, players_ids):
         """Reprendre l'entrée des résultats pour les rounds d'un tournoi."""
