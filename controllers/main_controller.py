@@ -6,7 +6,7 @@ import constantes
 
 
 class MainController:
-    """Contrôleur principal de l'application."""
+    """Contrôleur principal de l'application"""
 
     def __init__(self):
         """Initialise le contrôleur principal."""
