@@ -1,7 +1,0 @@
-Liste des tournois :
-Nom : tounoi de noel, Etat du tournoi : (IN_PROGRESS),  Lieu : paris, Date : 25/12/2023
-Nom : tournoi janvier 2024, Etat du tournoi : (TO_LAUNCH),  Lieu : lyon, Date : 02/01/2024
-Nom : tournoi 2, Etat du tournoi : (TO_LAUNCH),  Lieu : lille, Date : 12/09/2023
-Nom : tournoi OC, Etat du tournoi : (TO_LAUNCH),  Lieu : france, Date : 01/04/2024
-Nom : tournoi 3, Etat du tournoi : (TO_LAUNCH),  Lieu : toulouse, Date : 01/08/2024
-Nom : tournoi de paques, Etat du tournoi : (IN_PROGRESS),  Lieu : ils de paques, Date : 15/04/2023

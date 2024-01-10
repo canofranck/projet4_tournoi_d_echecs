@@ -1,5 +1,0 @@
-Liste des tournois :
-Nom : tournoi 1, Etat du tournoi : (FINISH),  Lieu : meaux, Date : 01/01/2020
-Nom : tournoi 2, Etat du tournoi : (TO_LAUNCH),  Lieu : paris, Date : 01/02/2023
-Nom : tournoi 3, Etat du tournoi : (IN_PROGRESS),  Lieu : paris, Date : 01/12/2023
-Nom : tounoi de noel, Etat du tournoi : (TO_LAUNCH),  Lieu : pole nord, Date : 24/12/2023

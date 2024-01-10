@@ -154,7 +154,6 @@ class TournamentController:
 
     def start_selected_tournament(self, tournament):
         """Démarre le tournoi sélectionné."""
-        # print(f"Au début de la méthode start_selected_tournament : {tournament.tournament_name}")
 
         # Modifie l'état du tournoi
 
@@ -172,12 +171,11 @@ class TournamentController:
                 tournament, tournament.tournament_id, players_ids
             )
 
-            print("Le tournoi a été lancé avec succès.")
         elif tournament.etat_tournoi == IN_PROGRESS:
             print("Le tournoi est déjà en cours.")
         else:
             print(
-                "Le tournoi ne peut pas être lancé dans son état actuel. dans start selected tournament"
+                "Le tournoi ne peut pas être lancé dans son état actuel."
             )
 
     def resume_tournament_menu(self):

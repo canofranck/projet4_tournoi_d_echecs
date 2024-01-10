@@ -1,0 +1,9 @@
+Liste de tous les joueurs par ordre alphabétique :
+Nom : c, Prénom : pascale, Date de naissance : 25/05/1967, ID : 611b18, Score du tournoi : 0
+Nom : c#, Prénom : magali, Date de naissance : 26/10/1993, ID : 992b85, Score du tournoi : 0
+Nom : c++, Prénom : emma, Date de naissance : 26/06/2001, ID : 8900ca, Score du tournoi : 0
+Nom : java, Prénom : nathan, Date de naissance : 27/03/2007, ID : d079a0, Score du tournoi : 0
+Nom : javascript, Prénom : philippe, Date de naissance : 01/07/1971, ID : 8d0fc2, Score du tournoi : 0
+Nom : kotlin, Prénom : raphael, Date de naissance : 01/06/1995, ID : 11851e, Score du tournoi : 0
+Nom : php, Prénom : mamadou, Date de naissance : 25/12/1995, ID : a3776f, Score du tournoi : 0
+Nom : python, Prénom : franck, Date de naissance : 23/05/1971, ID : 13eb8a, Score du tournoi : 0

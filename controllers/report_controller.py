@@ -108,7 +108,7 @@ class ReportController:
         ongoing_tournaments = [t for t in tournaments]
 
         if not ongoing_tournaments:
-            TournamentView.display_no_ongoing_tournaments()
+            TournamentView.display_ongoing_tournaments(tournaments)
             return
         print("Quel tournois vous voulez les details :")
         for i, tournament in enumerate(ongoing_tournaments, start=1):
@@ -361,7 +361,7 @@ class ReportController:
         ongoing_tournaments = [t for t in tournaments]
 
         if not ongoing_tournaments:
-            TournamentView.display_no_ongoing_tournaments()
+            TournamentView.display_ongoing_tournaments(tournaments)
             return
         print("Quel tournois vous voulez les details :")
         for i, tournament in enumerate(ongoing_tournaments, start=1):
@@ -413,7 +413,7 @@ class ReportController:
         ongoing_tournaments = [t for t in tournaments]
 
         if not ongoing_tournaments:
-            TournamentView.display_no_ongoing_tournaments()
+            TournamentView.display_ongoing_tournaments(tournaments)
             return
         print("Quel tournois vous voulez les details :")
         for i, tournament in enumerate(ongoing_tournaments, start=1):

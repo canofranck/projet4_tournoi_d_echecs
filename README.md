@@ -10,12 +10,14 @@ Développé sous Windows 10  et Python version 3.10.11
 
 1. [Installation du projet](#chapitre1)
     1. [Windows](#chapitre1-1)
-    1. [MacOS et Linux](chapitre1-2)
-    3. [Générer un rapport flake8](chapitre1-3)
-2. [menus du programme](chapitre2)
-    1. [Menu principal](#section2-1)
-    2. [Exemple de Rapports](#section2-2)
-3. [Exemples d'affichage](#section3)
+    1. [MacOS et Linux](#chapitre1-2)
+    3. [Générer un rapport flake8](#chapitre1-3)
+2. [menus du programme](#chapitre2)
+    1. [Menu principal](#chapitre2-1)
+    2. [Menu des Rapports](#chapitre2-2)
+3. [Exemple de match et de rapports](#chapitre3)
+    1. [Affichage entrée d'un match](#chapitre3-1)
+    2. [Exemple de Rapports](#chapitre3-2)
 
 
 <div id='chapitre1'></div>
@@ -81,7 +83,7 @@ Dans le terminal, naviguer vers le dossier souhaité.
 
 <div id='chapitre2'></div>
 
-## 2. Options des menus
+## 2. menus du programme
 
 <div id='chapitre2-1'></div>
 
@@ -95,12 +97,17 @@ Dans le terminal, naviguer vers le dossier souhaité.
 
 <div id='chapitre3'></div>
 
-## 3. Exemples d'affichage
-#### Matchs d'une ronde :
+## 3. Exemple de match et de rapports
+
+<div id='chapitre3-1'></div>
+
+#### i. Affichage entrée d'un match :
 ![round](_img/round.jpg)
 
-#### Rapport des joueurs :
+<div id='chapitre3-2'></div>
+
+#### ii. Exemple de Rapports :
 ![report_player](_img/reports_player.jpg)
 
-#### Rapport des rounds :
+
 ![report_round](_img/reports_round.jpg)

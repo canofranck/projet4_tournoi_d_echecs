@@ -14,27 +14,32 @@ class MatchController:
 
             # Saisie des scores par les utilisateurs
 
-            score1 = int(
-                input(
-                    f"Score de {match.player1.first_name} {match.player1.last_name}: "
-                )
-            )
-            score2 = int(
-                input(
-                    f"Score de {match.player2.first_name} {match.player2.last_name}: "
-                )
-            )
-            print()
-            # Mettre à jour les scores des joueurs
+            while True:
+                try:
+                    score1 = int(
+                        input(
+                            f"Score de {match.player1.first_name} {match.player1.last_name}: "
+                        )
+                    )
+                    score2 = int(
+                        input(
+                            f"Score de {match.player2.first_name} {match.player2.last_name}: "
+                        )
+                    )
+                    print()
+                    # Mettre à jour les scores des joueurs
 
-            match.score1 = score1
-            match.score2 = score2
-            if score1 > score2:
-                match.score1 = 1
-                match.score2 = 0
-            elif score1 < score2:
-                match.score1 = 0
-                match.score2 = 1
-            else:
-                match.score1 = 0.5
-                match.score2 = 0.5
+                    match.score1 = score1
+                    match.score2 = score2
+                    if score1 > score2:
+                        match.score1 = 1
+                        match.score2 = 0
+                    elif score1 < score2:
+                        match.score1 = 0
+                        match.score2 = 1
+                    else:
+                        match.score1 = 0.5
+                        match.score2 = 0.5
+                    break
+                except ValueError:
+                    print("Veuillez entrer des chiffres valides pour les scores.")

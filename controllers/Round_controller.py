@@ -17,7 +17,7 @@ class roundController:
 
         players = Player.load_players_by_ids(players_ids)
         number_of_rounds = selected_tournament.number_of_tours
-        print("\nce tournoi a ", number_of_rounds, " tours")
+        print("\nce tournoi a ", number_of_rounds, " rounds")
         # Démarre le tournoi spécifique
 
         selected_tournament.start_tournament(tournament)
@@ -73,13 +73,6 @@ class roundController:
             current_round_number = round_data.get("round_number", 0)
             if current_round_number < round_number and round_data.get("matches"):
                 previous_results.extend(round_data["matches"])
-                # Afficher les paires de joueurs récupérées
-                # print(f"Debug: Pairs of players for round {round_data['round_name']}:")
-                # for pair in round_data['matches']:
-                #     player1_id, _ = pair[0]
-                #     player2_id, _ = pair[1]
-                #     print(f"Pair: {player1_id} vs {player2_id}")
-
                 break
         return previous_results
 
@@ -113,21 +106,12 @@ class roundController:
                 for player_id, score in match_data:
                     self.update_player_points(player_points, player_id, score)
         sorted_players = sorted(player_points.items(), key=lambda x: x[1], reverse=True)
-        # print("Points par joueur dans camcilate points for tournament:")
-        # for player_id, points in sorted_players:
-        #     player = Player.get_player_by_id(player_id)
-        #     if player:
-        #         print(f"{player.first_name} {player.last_name}: {points} points")
-        #     else:
-        #         print(f"Player with ID {player_id} not found.")
-
         return sorted_players
 
     def update_player_points(self, player_points, player_id, score):
         player_points.setdefault(player_id, 0)
         player_points[player_id] += score
         # Mettez à jour le score du tournoi dans le modèle Player
-
         # player = Player.get_player_by_id(player_id)
         # if player:
         # new_tournament_score = player_points[player_id]

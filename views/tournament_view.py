@@ -81,7 +81,7 @@ class TournamentView:
     @staticmethod
     def display_ongoing_tournaments(tournaments):
         """Affiche les tournois en cours."""
-        print("Tournois en cours dans display:\n")
+        print("Tournois en cours :\n")
         for i, tournament in enumerate(tournaments):
             TournamentView.display_tournament(tournament, i)
         print()
