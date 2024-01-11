@@ -31,18 +31,18 @@ Développé sous Windows 10  et Python version 3.10.11
 Dans Windows Powershell, naviguer vers le dossier souhaité.
 ###### Récupération du projet
 
-    $ git clone https://github.com/canofranck/projet4_tournoi_d_echecs
+     git clone https://github.com/canofranck/projet4_tournoi_d_echecs
 
 ###### Activer l'environnement virtuel
-    $ cd Repertoire_du_projet
-    $ python -m venv env 
-    $ ~env\scripts\activate
+    cd Repertoire_du_projet
+    python -m venv env 
+    env\scripts\activate
     
 ###### Installer les packages requis
-    $ pip install -r requirements.txt
+    pip install -r requirements.txt
 
 ###### Lancer le programme
-    $ python main.py
+    python main.py
 
 
 <div id='chapitre1-2'></div>
@@ -58,7 +58,7 @@ Dans le terminal, naviguer vers le dossier souhaité.
 ###### Activer l'environnement virtuel
     $ cd Repertoire_du_projet
     $ python3 -m venv env 
-    $ source env/bin/activate
+    $ env/bin/activate
     
 ###### Installer les packages requis
     $ pip install -r requirements.txt
