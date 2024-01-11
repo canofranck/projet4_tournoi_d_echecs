@@ -1,6 +1,5 @@
 from datetime import datetime
 import uuid
-# from constantes import TO_LAUNCH, IN_PROGRESS
 import constantes
 
 
@@ -67,7 +66,6 @@ class TournamentView:
         gen_id = str(uuid.uuid4())
         tournament_id = gen_id[:6]
         tournament_data["tournament_id"] = tournament_id
-        # tournament_data['players_ids'] = input("Liste des ID des joueurs séparés par des virgules: ").split(',')
 
         return tournament_data
 

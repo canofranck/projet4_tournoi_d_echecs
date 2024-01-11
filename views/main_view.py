@@ -31,7 +31,7 @@ class MainView:
 
         if name == "nt":
             _ = system("cls")
-        # for mac and linux(here, os.name is 'posix')
+        # for mac and linux
 
         else:
             _ = system("clear")

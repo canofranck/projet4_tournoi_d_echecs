@@ -131,7 +131,6 @@ class ReportController:
         tournament_date += (
             f"Lieu du tournoi : {selected_tournament.location}\n"
             f"Date du tournoi : {selected_tournament.tournament_date}\n"
-            # f"Lieu du tournoi : {selected_tournament.location}\n"
             f"Nombre de rounds : {selected_tournament.number_of_tours}\n"
             f"Description du tournoi : {selected_tournament.description}\n"
             f"Etat du tournoi : {selected_tournament.etat_tournoi}\n"

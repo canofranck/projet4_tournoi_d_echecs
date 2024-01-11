@@ -132,7 +132,8 @@ class Player:
         Returns:
             list: Liste des joueurs correspondant aux IDs spécifiés.
         """
-        all_players = cls.load_players()  # Chargez tous les joueurs
+        # Charge tous les joueurs
+        all_players = cls.load_players()  
         selected_players = [
             player for player in all_players if player.player_id in players_ids
         ]
@@ -151,13 +152,6 @@ class Player:
             "player_id_national": self.player_id_national,
             "score_tournament": self.score_tournament,
         }
-
-    # def to_list(self):
-    #     """Convertit l'objet Player en une liste.
-    #     Returns:
-    #         list: Liste représentant l'objet Player.
-    #     """
-    #     return [self.player_id, self.score]
 
     @classmethod
     def get_player_by_id(cls, player_id):
@@ -185,7 +179,7 @@ class Player:
         for player in players:
             if player.player_id == player_id:
                 player.score_tournament += new_score
-        # Enregistrez tous les joueurs dans le fichier JSON
+        # Enregistre tous les joueurs dans le fichier JSON
 
         with open(os.path.join(DATA_FOLDER, FILE_NAME), "w") as file:
             players_data = [

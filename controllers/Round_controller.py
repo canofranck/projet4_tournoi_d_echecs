@@ -111,13 +111,6 @@ class roundController:
     def update_player_points(self, player_points, player_id, score):
         player_points.setdefault(player_id, 0)
         player_points[player_id] += score
-        # Mettez à jour le score du tournoi dans le modèle Player
-        # player = Player.get_player_by_id(player_id)
-        # if player:
-        # new_tournament_score = player_points[player_id]
-        # player.update_score_tournament(player_id, new_tournament_score)
-        # else:
-        # print(f"Joueur avec l'ID {player_id} non trouvé.")
 
     def resume_rounds(self, tournament_id, players_ids):
         """Reprendre l'entrée des résultats pour les rounds d'un tournoi."""
@@ -126,7 +119,7 @@ class roundController:
         selected_tournament = Tournament.load_tournament_by_id(tournament_id)
         players = Player.load_players_by_ids(
             players_ids
-        )  # Chargez uniquement les joueurs inscrits
+        )  # Charge uniquement les joueurs inscrits
         number_of_rounds = selected_tournament.number_of_tours
         # Reprendre l'entrée des résultats pour chaque round
 
@@ -190,7 +183,7 @@ class roundController:
                 for player_id, score in match_data:
                     player_points.setdefault(player_id, 0)
                     player_points[player_id] += score
-                    # Mettez à jour le score du tournoi dans le modèle Player
+                    # Mets à jour le score du tournoi dans le modèle Player
 
                     player = Player.get_player_by_id(player_id)
                     if player:

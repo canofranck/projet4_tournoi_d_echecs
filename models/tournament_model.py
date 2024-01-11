@@ -103,20 +103,6 @@ class Tournament:
         with open(file_path, "w") as json_file:
             json.dump(existing_data, json_file, indent=2)
 
-    # @staticmethod
-    # def get_next_tournament_id():
-    #     """Get the next tournament ID from the JSON file."""
-    #     data = Tournament.load()
-    #     # Vérifie si la liste data est vide
-    #     if not data:
-    #         return 1  # Si le fichier n'existe pas, c'est le premier tournoi
-
-    #     # Les données sont maintenant stockées dans une liste, récupérons le dernier élément
-    #     last_tournament = data[-1]
-
-    #     # Si 'tournament_id' est présent dans le dernier tournoi, incrémentez-le, sinon, commencez à 1
-    #     return last_tournament.get('tournament_id', 0) + 1
-
     @staticmethod
     def load_tournaments():
         """Load the list of tournaments from the JSON file."""
@@ -184,11 +170,11 @@ class Tournament:
         tournaments = Tournament.load_tournaments()
         for tournament in tournaments:
             if tournament.tournament_id == tournament_id:
-                # Mettez à jour les valeurs du tournoi
+                # Mets à jour les valeurs du tournoi
 
                 for key, value in updated_values.items():
                     setattr(tournament, key, value)
-        # Sauvegardez la liste mise à jour dans le fichier JSON
+        # Sauvegarde la liste mise à jour dans le fichier JSON
 
         Tournament.save_tournaments(tournaments)
 
@@ -216,13 +202,3 @@ class Tournament:
                     for tournament_data in data
                 ]
         return []
-
-    # @staticmethod
-    # def from_dict_with_rounds(data):
-    #     """Crée une instance de la classe Tournament à partir d'un dictionnaire avec informations sur les rounds."""
-    #     tournament = Tournament(
-    #     )
-
-    #     tournament.list_of_tours = [Round.from_dict(round_data) for round_data in data.get("list_of_tours", [])]
-
-    #     return tournament
