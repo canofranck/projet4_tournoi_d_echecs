@@ -15,6 +15,7 @@ class TournamentController:
         self.tournaments = []
         self.tournament_view = TournamentView()
         self.main_view = MainView()
+        self.round_controller = roundController()
 
     def load_tournaments(self):
         """Charge les tournois depuis le fichier et met à jour self.tournaments."""
@@ -111,7 +112,7 @@ class TournamentController:
         print("Liste des joueurs disponibles:")
         for i, player in enumerate(players, start=1):
             print(f"{i}. {player.first_name} {player.last_name}")
-            
+
         while True:
             try:
                 selection = input(
@@ -166,8 +167,7 @@ class TournamentController:
 
             # Appel au contrôleur de round pour débuter l'entrée des résultats
 
-            round_controller = roundController()
-            round_controller.start_rounds(
+            self.round_controller.start_rounds(
                 tournament, tournament.tournament_id, players_ids
             )
 
@@ -214,8 +214,7 @@ class TournamentController:
         players_ids = tournament.players_ids
         # Appel au contrôleur de round pour reprendre l'entrée des résultats
 
-        round_controller = roundController()
-        round_controller.resume_rounds(tournament.tournament_id, players_ids)
+        self.round_controller.resume_rounds(tournament.tournament_id, players_ids)
 
     def load_tournaments_with_rounds(self):
         """Charge les tournois avec les informations sur les rounds depuis le fichier

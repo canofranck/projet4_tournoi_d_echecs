@@ -68,8 +68,8 @@ class PlayerController:
         )
         # Vérifiez s'il y a des doublons en fonction de l'identifiant du joueur
 
-        if Player.is_player_id_taken(player_id):
-            print("Le joueur existe déjà dans la base de données.")
+        if Player.is_player_id_taken(player_id_national):
+            print("Le joueur existe déjà dans la base de données.Veuillez entrez un nouveau joueur")
         else:
             player.save()
             print("Joueur ajouté avec succès dans la sauvegarde!")

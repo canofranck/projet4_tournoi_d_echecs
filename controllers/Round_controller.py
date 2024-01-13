@@ -199,4 +199,5 @@ class roundController:
                 print(f"{player.first_name} {player.last_name}: {points} points")
             else:
                 print(f"Player with ID {player_id} not found.")
+        print()
         return sorted_players

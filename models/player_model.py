@@ -111,16 +111,16 @@ class Player:
             os.makedirs(DATA_FOLDER)
 
     @classmethod
-    def is_player_id_taken(cls, player_id):
+    def is_player_id_taken(cls, player_id_national):
         """Vérifie si l'ID du joueur est déjà pris.
         Args:
-            player_id (int): L'ID du joueur à vérifier.
+            player_id_national (int): L'ID du joueur à vérifier.
         Returns:
             bool: True si l'ID est déjà pris, False sinon.
         """
         players = Player.load_players()
         for player in players:
-            if player.player_id == player_id:
+            if player.player_id_national == player_id_national:
                 return True
         return False
 
@@ -133,7 +133,7 @@ class Player:
             list: Liste des joueurs correspondant aux IDs spécifiés.
         """
         # Charge tous les joueurs
-        all_players = cls.load_players()  
+        all_players = cls.load_players()
         selected_players = [
             player for player in all_players if player.player_id in players_ids
         ]
